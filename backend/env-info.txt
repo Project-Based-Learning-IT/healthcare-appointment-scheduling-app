@@ -1,1 +1,4 @@
 PORT = 5000
+ATLAS_URI = mongodb+srv://user:passwordforuser123@cluster0.4yr1r.mongodb.net/healthcareApp?retryWrites=true&w=majority
+ATLAS_URI_TEST = mongodb+srv://user:passwordforuser123@cluster0.4yr1r.mongodb.net/healthcareAppTest?retryWrites=true&w=majority
+NODE_ENV = dev
