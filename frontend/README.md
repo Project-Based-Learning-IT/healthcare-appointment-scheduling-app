@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## To Run development server
-npm install (installs dependancies)
+npm install (installs dependancies) \
 npm start
 
 
