@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
+
 ## To Run development server
 npm install (installs dependancies) \
 npm install bootstrap \
@@ -10,6 +11,7 @@ npm install react-router-dom \
 npm install react-datepicker \
 npm install axios \
 npm start \
+
 
 ## Available Scripts
 
