@@ -8,10 +8,10 @@ export default class Homepage extends Component {
       <div>
         <div
           style={{
-            width: 1001,
+            width: 1536,
             height: 362,
             top: 63,
-            left: 245,
+            left: 0,
             position: "absolute",
             backgroundColor: "#BAE568",
           }}

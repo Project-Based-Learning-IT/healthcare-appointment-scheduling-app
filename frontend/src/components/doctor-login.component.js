@@ -60,11 +60,11 @@ export default class Doctor_Login extends Component {
             </div>
             <br />
             <div class="text-center">
-              <button type="submit" className="btn btn-outline-success">
-                <Link to="/doctor/:id" className="nav-link">
+              <Link to="/doctor/:id" className="nav-link">
+                <button type="submit" class="btn btn-success">
                   Login
-                </Link>
-              </button>
+                </button>
+              </Link>
             </div>
           </form>
         </div>
