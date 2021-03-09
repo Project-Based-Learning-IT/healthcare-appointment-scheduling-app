@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default class ExercisesList extends Component {
+export default class Homepage extends Component {
   render() {
     return (
       <div
@@ -25,46 +25,13 @@ export default class ExercisesList extends Component {
             backgroundColor: "#BAE568",
           }}
         >
-          <form>
-            <div className="col-12">
-              <label
-                className="visually-hidden"
-                htmlFor="inlineFormInputGroupUsername"
-              >
-                <centre>Username</centre>
-              </label>
-              <div className="input-group">
-                <div className="input-group-text">@</div>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="inlineFormInputGroupUsername"
-                  placeholder="Username"
-                />
-              </div>
-            </div>
-
-            <div className="col-12">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                <centre>Password</centre>
-              </label>
-              <div className="input-group">
-                <div className="input-group-text">🔑</div>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                  placeholder="********"
-                />
-              </div>
-            </div>
-            <br />
-            <div class="text-center">
-              <button type="submit" className="btn btn-primary">
-                Login
-              </button>
-            </div>
-          </form>
+          <div class="text-center">
+            <button type="button" class="btn btn-outline-success">
+              <Link to="/doctor-login" className="nav-link">
+                Doctor Login
+              </Link>
+            </button>
+          </div>
         </div>
       </div>
     );
