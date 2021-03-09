@@ -61,7 +61,7 @@ export default class ExercisesList extends Component {
             <br />
             <div class="text-center">
               <button type="submit" className="btn btn-primary">
-                Submit
+                Login
               </button>
             </div>
           </form>
