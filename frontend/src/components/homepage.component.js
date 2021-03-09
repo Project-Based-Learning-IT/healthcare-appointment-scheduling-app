@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Carousel from "react-bootstrap/Carousel";
 
 export default class Homepage extends Component {
   render() {
@@ -13,9 +14,51 @@ export default class Homepage extends Component {
             top: 63,
             left: 0,
             position: "absolute",
-            backgroundColor: "#BAE568",
+            backgroundColor: "#5f6063",
           }}
-        />
+        >
+          <div className="container-fluid">
+            <Carousel interval={2000} keyboard={false} pauseOnHover={true}>
+              <Carousel.Item style={{ height: "362px" }}>
+                <img
+                  style={{ height: "362px" }}
+                  className="d-block w-100"
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyHCKIMPmHYJoKmUfIAGkVXeLQf9NPYy97NQ&usqp=CAU"
+                  }
+                />
+
+                <Carousel.Caption>
+                  <h3>First</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item style={{ height: "362px" }}>
+                <img
+                  style={{ height: "362px" }}
+                  className="d-block w-100"
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyHCKIMPmHYJoKmUfIAGkVXeLQf9NPYy97NQ&usqp=CAU"
+                  }
+                />
+                <Carousel.Caption>
+                  <h3>Second</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item style={{ height: "362px" }}>
+                <img
+                  style={{ height: "362px" }}
+                  className="d-block w-100"
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyHCKIMPmHYJoKmUfIAGkVXeLQf9NPYy97NQ&usqp=CAU"
+                  }
+                />
+                <Carousel.Caption>
+                  <h3>Third</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </div>
+        </div>
 
         <div className="text-center d-grid gap-2 d-md-block">
           <button
@@ -43,7 +86,7 @@ export default class Homepage extends Component {
               width: 300,
               height: 104,
               top: 455,
-              left: 809,
+              left: 900,
               position: "absolute",
             }}
           >
