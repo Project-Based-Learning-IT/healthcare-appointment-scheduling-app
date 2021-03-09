@@ -5,33 +5,52 @@ import axios from "axios";
 export default class Homepage extends Component {
   render() {
     return (
-      <div
-        style={{
-          width: 633,
-          height: 346,
-          top: 168,
-          left: 449,
-          position: "absolute",
-          backgroundColor: "#BAE568",
-        }}
-      >
+      <div>
         <div
           style={{
-            width: 304,
-            height: 179,
-            top: 78,
-            left: 165,
+            width: 1536,
+            height: 362,
+            top: 63,
+            left: 0,
             position: "absolute",
             backgroundColor: "#BAE568",
           }}
-        >
-          <div class="text-center">
-            <button type="button" class="btn btn-outline-success">
-              <Link to="/doctor-login" className="nav-link">
-                Doctor Login
-              </Link>
-            </button>
-          </div>
+        />
+
+        <div className="text-center d-grid gap-2 d-md-block">
+          <button
+            type="button"
+            className="btn btn-primary btn-lg "
+            style={{
+              float: "left",
+              width: 300,
+              height: 104,
+              top: 458,
+              left: 311,
+              position: "absolute",
+            }}
+          >
+            <Link to="/patient/:id" className=" nav-link text-white">
+              Patient Login
+            </Link>
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-primary btn-lg"
+            style={{
+              float: "left",
+              width: 300,
+              height: 104,
+              top: 455,
+              left: 809,
+              position: "absolute",
+            }}
+          >
+            <Link to="/doctor-login" className="nav-link text-white">
+              Doctor Login
+            </Link>
+          </button>
         </div>
       </div>
     );

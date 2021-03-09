@@ -2,7 +2,21 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { login: "Login with Google" };
+  }
+
+  changeLogin = (login) => {
+    this.setState({ login });
+  };
   render() {
+    var logout = (
+      <li classname="navbar-item ">
+        <link to="/" classname="nav-link " />
+        Logout
+      </li>
+    );
     return (
       <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
         <Link to="/" className="navbar-brand">
@@ -15,12 +29,13 @@ export default class Navbar extends Component {
           ></img>
           WebDoc
         </Link>
-        <div className="collpase navbar-collapse">
-          <ul className="navbar-nav ml-auto">
-            <li className="navbar-item ">
-              <Link to="/" className="nav-link ">
-                Login with Google
-              </Link>
+        <div className="collapse navbar-collapse">
+          <ul className="navbar-nav ml-auto text-light bg-dark">
+            <li classname="navbar-item">
+              <link to="/" classname="nav-link " />
+              <button type="button" class="btn btn-outline-primary">
+                {this.state.login}
+              </button>
             </li>
           </ul>
         </div>
