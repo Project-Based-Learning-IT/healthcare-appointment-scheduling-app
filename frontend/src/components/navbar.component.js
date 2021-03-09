@@ -15,7 +15,7 @@ export default class Navbar extends Component {
           ></img>
           WebDoc
         </Link>
-        <div className="collpase navbar-collapse">
+        <div className="collapse navbar-collapse">
           <ul className="navbar-nav ml-auto">
             <li className="navbar-item ">
               <Link to="/" className="nav-link ">
