@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let Doctor = require('../models/doctor.model');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 // To get all the doctors
 // **ONLY FOR TESTING**
@@ -53,6 +55,41 @@ router.route('/update').put((req, res) => {
             })
         }
     })
+})
+
+// Doctor login
+router.route('/login/:username/:password').get(async (req, res) => {
+    try {
+        const username = req.params.username;
+        const password = req.params.password;
+
+        const doctor = await Doctor.findOne(
+            { 
+                username: username,
+                password: password
+            }
+        );
+        
+        console.log(doctor)
+
+        if (doctor === null) {
+            return res.status(201).json({ "message": "wrong username or password" });
+        }
+
+        // Doctor found... return the token to the client side
+        const token = jwt.sign(
+            JSON.stringify(doctor),
+            process.env.KEY, 
+            {
+                algorithm: process.env.ALGORITHM
+            }
+        )
+        return res.status(200).json({ token: token.toString() });
+
+    } catch (err) {
+        console.log(err)
+        return res.status(400).json(err);
+    }
 })
 
 module.exports = router;
