@@ -9,7 +9,8 @@ const doctorSchema = new Schema({
         unique: true
     },
     passsword: {
-        type: String
+        type: String,
+        required: true
     },
     name: {
         type: String
