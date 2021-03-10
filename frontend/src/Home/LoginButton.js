@@ -10,7 +10,7 @@ return(
     <div class="col-12 col-md-6 ">
         <Card/>
     </div>
-    <div class="col-12 col-md-6"><Card LoginButton="Patients" /></div>
+    <div class="col-12 col-md-6"><Card login="Patient" /></div>
    
   </div>
 )

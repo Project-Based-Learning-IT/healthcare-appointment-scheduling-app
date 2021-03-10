@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Card =({login="doctor"})=>{
+const Card =({login="Doctor"})=>{
 
   return(
     <div className="card" style={{width: "18rem"}}>
@@ -13,7 +13,7 @@ const Card =({login="doctor"})=>{
     />
     <div class="card-body width "
     >
-      <a href="#" class="btn btn-primary justify-content-center">login as a {login}</a>
+      <a href="#" class="btn btn-primary justify-content-center">Login as a {login}</a>
     </div>
     </div>
   )
