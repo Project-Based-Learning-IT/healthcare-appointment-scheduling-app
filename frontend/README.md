@@ -5,14 +5,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## To Run development server
-npm install (installs dependancies) \
+npm install (installs all dependancies) \
+
+npm start \
+
+## Dependancies
 npm install bootstrap \
 npm install react-router-dom \
 npm install react-datepicker \
 npm install axios \
 npm install react-bootstrap bootstrap \
-npm start \
-
 
 ## Available Scripts
 
