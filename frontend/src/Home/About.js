@@ -5,8 +5,8 @@ import Image from '../image/doctor.jpg'
 const About=()=>{
 
     return(
-        <div class="row m-3">
-  <div class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti, blanditiis est harum suscipit accusamus pariatur minus error aliquam quos porro quidem sit, minima nobis quisquam perspiciatis quia amet saepe!
+        <div className="row m-3">
+  <div className="col-8 text-white text-center pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti, blanditiis est harum suscipit accusamus pariatur minus error aliquam quos porro quidem sit, minima nobis quisquam perspiciatis quia amet saepe!
   Soluta itaque totam perferendis, quo voluptas porro cum? Nam nostrum quas aut! Amet et mollitia illo laborum facilis? Quidem provident expedita est inventore libero adipisci eaque qui quia hic. Eligendi.
   Laboriosam atque ea fugit aut ratione excepturi repellat animi nobis magni enim numquam quisquam, iste voluptate laborum obcaecati eaque quis molestias incidunt odio, reiciendis ut facilis rem alias. Aut, modi.
   Provident, corrupti architecto quibusdam enim pariatur harum earum cupiditate, magni voluptates deserunt minus eos ab libero quam id praesentium optio! Nemo aspernatur natus nisi. Id aliquid quia omnis molestias aperiam!
@@ -16,10 +16,12 @@ const About=()=>{
   Recusandae esse optio sed vitae laboriosam amet! Quod maxime ducimus ratione adipisci ea esse cupiditate minus reiciendis cum architecto! Deserunt provident delectus qui quibusdam praesentium? Cupiditate eligendi fuga iure est?
   Sunt accusamus facere distinctio, at mollitia, hic iste quae praesentium aliquam animi quisquam. Aliquid numquam necessitatibus asperiores nisi nostrum accusamus delectus quod ad praesentium facilis doloremque nulla voluptatem, fugiat aliquam.
   Nobis provident minima tenetur eligendi vel laudantium debitis facere maxime repudiandae quis, at repellendus earum, dolore voluptate sunt consequatur labore sed adipisci eius est. A unde rerum beatae pariatur nemo?</div>
-  <div class="col-4">
+  <div className="col-4 r">
       <img src={Image}
+
       width="100%"
       height="100%"
+      className="rounded-circle"
       
       alt=""/>
   </div>

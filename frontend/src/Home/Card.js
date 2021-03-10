@@ -1,17 +1,22 @@
 import React from 'react';
 
-const Card=({Option})=> {
-    return(
-        <div>
-            <div className="card" style={{width: "18rem"}}>
 
-  <div className="card-body">
-    <h5 className="card-title">{Option}</h5>
-    <a href="#" className="btn btn-primary">Go to {Option}</a>
-  </div>
-</div>
-        </div>
+const Card =({login="doctor"})=>{
 
-    )
+  return(
+    <div className="card" style={{width: "18rem"}}>
+    <img src="..." class="card-img-top" alt="..."
+    width= "100"
+    height= "150"
+
+    
+    />
+    <div class="card-body width "
+    >
+      <a href="#" class="btn btn-primary justify-content-center">login as a {login}</a>
+    </div>
+    </div>
+  )
 }
- export default Card;
+
+export default Card
