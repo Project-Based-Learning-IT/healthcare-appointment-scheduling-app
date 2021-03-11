@@ -8,6 +8,9 @@ const patientSchema = new Schema({
         required: true,
         unique: true
     },
+    email : {
+        type: String
+    },
     name: {
         type: String
     },
