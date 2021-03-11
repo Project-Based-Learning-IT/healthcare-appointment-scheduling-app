@@ -1,50 +1,66 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Carousel from 'react-bootstrap/Carousel'
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Carousel from "react-bootstrap/Carousel";
+import cor1 from '../image/cors1.jpg'
 
 const Jumbo=()=>{
-   
-return(
+    return(
+        <div>
+            <div
+          style={{
+            width: "100%",
+            height:"400px",
+            top: 1,
+            position: "relative",
+            
+          }}
+        >
+          <div className="container-fluid" style={{width:"100%"}}>
+            <Carousel interval={2000} keyboard={false} pauseOnHover={true}>
+              <Carousel.Item style={{ height: "400px" }}>
+                <img
+                  style={{ height: "400px" }}
+                  className="d-block w-100"
+                  
+                  src={
+                    cor1
+                  }
+                />
 
-<Carousel >
-  <Carousel.Item interval={1000}>
-    <img
-      className="d-block w-100"
-      src="doctorlogo.jpg"
-      alt="First slide"
-    />
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item interval={500}>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Second slide&bg=282c34"
-      alt="Second slide"
-    />
-    <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="holder.js/800x400?text=Third slide&bg=20232a"
-      alt="Third slide"
-    />
-    <Carousel.Caption>
-      <h3>Third slide label</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-</Carousel>
-
-)
-    
+                <Carousel.Caption>
+                  <h3>First</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item style={{ height: "400px" }}>
+                <img
+                  style={{ height: "400px" }}
+                  className="d-block w-100"
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyHCKIMPmHYJoKmUfIAGkVXeLQf9NPYy97NQ&usqp=CAU"
+                  }
+                />
+                <Carousel.Caption>
+                  <h3>Second</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item style={{ height: "400px" }}>
+                <img
+                  style={{ height: "400px" }}
+                  className="d-block w-100"
+                  src={
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyHCKIMPmHYJoKmUfIAGkVXeLQf9NPYy97NQ&usqp=CAU"
+                  }
+                />
+                <Carousel.Caption>
+                  <h3>Third</h3>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </div>
+        </div>
+        </div>
+    )
 }
 
-export default Jumbo;
+
+export default Jumbo
