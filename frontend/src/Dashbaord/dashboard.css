@@ -1,0 +1,17 @@
+
+.main
+{
+	float: left;
+	width: 1085px;
+	height: 577px;
+	top: 67px;
+	left: 409px;
+	position: absolute;
+	background-color: #81817f;
+}
+ li{
+	 text-decoration: none;
+	 list-style:none
+ }
+
+

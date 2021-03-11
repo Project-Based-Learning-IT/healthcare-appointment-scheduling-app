@@ -14,7 +14,7 @@ const Navbar=({login="login with Google"})=>  {
             height="24"
             class="d-inline-block align-top mr-2 mt-1"
           ></img>
-          WebDoc
+          Hospital Mangement System
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ml-auto text-light bg-dark">
