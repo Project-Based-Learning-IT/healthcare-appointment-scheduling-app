@@ -8,12 +8,12 @@ import LoginButton from '../Home/LoginButton';
 
 const Home=()=>{
     return(
-<div>
+<div >
    <Navbar/>
    <Jumbo/> 
    <About/>
    <LoginButton/>
-   <Footer/>
+   <Footer />
 
 </div>
     )

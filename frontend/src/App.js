@@ -2,13 +2,11 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route,Switch } from "react-router-dom";
 import "./App.css";
-
-import Patient from "./components/patient.component";
-import Doctor_Login from "./components/doctor-login.component";
-import Doctor from "./components/doctor.component";
-
-
 import Home from "./Pages/Home";
+import DoctorLogin from "./Pages/DoctorLogin";
+import DoctorDashboard from "./Pages/DoctorDashboard";
+import PaitentDashboard from "./Pages/PaitentDashboard";
+
 
 function App() {
   return (
@@ -16,9 +14,12 @@ function App() {
       
   <Switch>
   <Route exact path="/" component={Home}/>
-    {/* <Route  path="/user" component={}/> */}
-    {/* <Route  path="/visit" component={}/> */}
-    {/* <Route   component={}/> */}
+    <Route exact  path="/doctorlogin" component={DoctorLogin}/>
+    <Route exact path="/doctor" component={DoctorDashboard}/>
+    <Route exact path="/patient" component={PaitentDashboard}/>
+
+    
+  
   </Switch>
   
     
