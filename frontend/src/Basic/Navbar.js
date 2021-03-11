@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from '../image/doctorlogo.jpg'
 
-const Navbar=({login="login with Google"})=>  {
+const Navbar=({login="Login with Google"})=>  {
     return (
       <nav className="navbar navbar-dark  navbar-expand-lg pl-4 pr-4 " style={{ backgroundColor: " #1a1a1a"}}>
         <Link to="/" className="navbar-brand">
