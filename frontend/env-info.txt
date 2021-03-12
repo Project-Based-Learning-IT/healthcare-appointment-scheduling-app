@@ -1,0 +1,2 @@
+REACT_APP_SERVER_URL=http://localhost:5000
+REACT_APP_CLIENT_ID=365803515308-boj1rpek38kabo6pm4448b869efoe47q.apps.googleusercontent.com

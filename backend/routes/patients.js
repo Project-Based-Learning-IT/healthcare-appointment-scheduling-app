@@ -38,9 +38,9 @@ router.route('/update-phone').put((req, res) => {
             patient.phoneNumber = req.body.phoneNumber;
 
             patient.save().then(() => {
-                res.json('Patient\'s phone number updated');
+                res.status(200).json('Patient\'s phone number updated');
             }).catch(err => {
-                res.status(400).json(`Error : ${err}`);
+                res.status(400).json({message: `Error : ${err}`});
             });
         }
     })
@@ -56,9 +56,9 @@ router.route('/google-login').post(async (req, res) => {
 
         // Check if the user already exists in the database
         const patient = await Patient.findOne({ googleId: googleId });
-        
-        // If the patient is not found or the phone number is not present in the database
-        if(patient === null || patient.phoneNumber === null){
+
+        // If the patient is not found
+        if(patient === null){
             const { email, name, picture } = decoded;
             const newPatient = new Patient({
                 googleId, email, name, picture
@@ -70,6 +70,11 @@ router.route('/google-login').post(async (req, res) => {
             else{
                 throw savedPromise;
             }
+        }
+
+        // If the phone number is not present in the database
+        else if(patient.phoneNumber === undefined){
+            return res.status(200).json({ phoneNumberExists : false });
         }
 
         // Patient's phone number already exists in the database
