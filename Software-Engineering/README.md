@@ -1,4 +1,4 @@
 ## Software Engineering Documents
 
-- User Stories
-- StakeHolders And Their Views
+- [User Stories](User_Stories.pdf)
+- [StakeHolders And Their Views](Stakeholders&Views.pdf)
