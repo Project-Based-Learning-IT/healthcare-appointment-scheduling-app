@@ -36,7 +36,8 @@ describe('Doctors', () => {
     describe('/POST Doctor', () => {
         it('POST a Doctor at doctors/add', (done) => {
             const newDoctor = new Doctor({
-                username: "testUsername"
+                username: "testUsername",
+                password: "testPassword"
             });
 
             chai.request(server)

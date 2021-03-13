@@ -55,12 +55,10 @@ describe('Patients', () => {
     describe('/PUT', () => {
         it('PUT request to update the data', (done) => {
             chai.request(server)
-            .put('/patients/update')
+            .put('/patients/update-phone')
             .send({
                 googleId: "testGoogleId",
                 phoneNumber: "test37438243280432432432",
-                name: "testName",
-                picture: "testPicture"
             })
             .end((err, res) => {
                 if (err) {

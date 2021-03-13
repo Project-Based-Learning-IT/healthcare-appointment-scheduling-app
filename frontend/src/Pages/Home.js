@@ -5,17 +5,16 @@ import About from '../Home/About';
 import Jumbo from '../Home/Jumbo';
 import LoginButton from '../Home/LoginButton';
 
+const Home = () => {
 
-const Home=()=>{
-    return(
-<div >
-   <Navbar/>
-   <Jumbo/> 
-   <About/>
-   <LoginButton/>
-   <Footer />
-
-</div>
+    return (
+        <div >
+            <Navbar />
+            <Jumbo />
+            <About />
+            <LoginButton />
+            <Footer />
+        </div>
     )
 }
 
