@@ -26,7 +26,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
     if(!err){
         console.log("Connection to database successful!");
     }
-});
+}); 
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
