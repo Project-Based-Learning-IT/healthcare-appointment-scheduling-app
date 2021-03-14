@@ -1,10 +1,15 @@
-import React ,{useContext} from 'react';
+import React ,{useContext, useMemo} from 'react';
 import Navbar from '../Basic/Navbar';
 import Leftside from '../Dashbaord/LeftsideDoctor';
+import jwt_decode from "jwt-decode";
 
 import "../Dashbaord/dashboard.css"
+import { AuthContext } from '../Auth/AuthContext';
 
 const PersonalDetails=()=>{
+	const { token } = useContext(AuthContext);
+	const doctor = useMemo(() => jwt_decode(token), [token]);
+
 	return(
 		<div className="bg-dark" style = {{height:"100vh"}}>
 			<Navbar/>
@@ -18,18 +23,14 @@ const PersonalDetails=()=>{
 				<h4 className="card-header">Personal Details</h4>
 				<ul className="list-group">
 					<li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Name:</span> 
-					</li>
-					<li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Email:</span> 
+						<span className="badge badge-success mr-2 p-2">Name: {doctor.name}</span> 
 					</li>
                     <li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2"> Specialization:</span> 
+						<span className="badge badge-success mr-2 p-2"> Specialization: {doctor.specialization}</span> 
 					</li>
                     <li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Phone No:</span> 
+						<span className="badge badge-success mr-2 p-2">Phone No: {doctor.phoneNumber}</span> 
 					</li>
-
 					
 				</ul>
 			</div>
