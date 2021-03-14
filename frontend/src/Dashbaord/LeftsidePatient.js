@@ -2,12 +2,15 @@ import React from "react"
 import Option from "./Option"
 import "./dashboard.css"
 
+
 const LeftsidePatient=()=>{
+    
+
    return(
     <div>
     <ul >
         <li >
-            <Option Value= "Personal Details"/>
+            <Option Value= "Personal Details" />
         </li >
         <li style={{textDecoration:"none"}}>
             <Option Value= "Search Doctor"/>

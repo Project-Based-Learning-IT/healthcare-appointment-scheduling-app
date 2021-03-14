@@ -1,12 +1,14 @@
 import React from 'react';
 
-const Rightside=()=>{
+const RightSide=()=>{
+    
+
+
     return(
         <div>
             
         </div>
+        
     )
 
 }
-
-export default Rightside;

@@ -105,10 +105,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-<<<<<<< HEAD
 } 
-=======
-};
->>>>>>> b388aed7bb39fa2d9275c7ba1cec813d98bcbb29
 
 export default Navbar;

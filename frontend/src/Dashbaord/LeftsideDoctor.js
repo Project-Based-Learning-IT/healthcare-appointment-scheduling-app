@@ -1,16 +1,26 @@
-import React from "react"
+import React, {useContext} from "react"
 import Option from "./Option"
 import "./dashboard.css"
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
+
 
 const LeftsidePatient=()=>{
+   
+
+
    return(
     <div>
     <ul className="mt-5" >
-        <li >
-            <Option Value= "Today's Schedule"/>
-        </li >
+        <li>
+            
+            <Option Value= "Today's Schedule" Option="today"/>
+            
+        </li>
         <li style={{textDecoration:"none"}}>
-            <Option Value= "Personal Details"/>
+            <Option Value= "Personal Details" Option="/doctor/perosnaldetails"/>
+            
+
         </li >
         <li style={{textDecoration:"none"}}>
             <Option Value= "Payment History"/>

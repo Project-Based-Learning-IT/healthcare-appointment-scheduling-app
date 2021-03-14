@@ -14,6 +14,8 @@ import PaitentDashboard from "./Pages/PaitentDashboard";
 import Error from "./Pages/Error";
 import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
+import PersonalDetails from "./Doctor/PersonalDetails"
+
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -26,10 +28,12 @@ function App() {
       <AuthContext.Provider value={{ token, setToken, googleId, setGoogleId }}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/doctorlogin" component={DoctorLogin} />
-          <Route path="/doctor" component={DoctorDashboard} />
-          <Route path="/patient" component={PaitentDashboard} />
-          <Route path="/patient/update-phone" component={PhoneNumber} />
+          <Route exact path="/doctorlogin" component={DoctorLogin} />
+          <Route exact path="/doctor" component={DoctorDashboard} />
+          <Route exact path="/patient" component={PaitentDashboard} />
+          <Route exact path="/patient/update-phone" component={PhoneNumber} />
+          <Route exact path="/doctor/perosnaldetails" component={PersonalDetails} />
+
           <Route path="*">
             <Error />
           </Route>
