@@ -8,9 +8,12 @@ const DoctorLogin=()=>{
 
     return(
         <div >
+            <div style={{height: "71vh"}}>
             <Navbar/>
             <LoginForm/>
-            <div style={{ position:"absolute", left: 0, bottom:"0", width: "100%"}}>
+            </div>
+           
+            <div style={{width: "100%"}}>
             <Footer />
             </div>
             

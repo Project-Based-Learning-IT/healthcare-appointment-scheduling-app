@@ -51,7 +51,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="navbar navbar-dark  navbar-expand-lg pl-4 pr-4 " style={{ backgroundColor: " #1a1a1a" }}>
+    <nav className="navbar navbar-dark  navbar-expand-lg pl-4 pr-4 w-100 " style={{ backgroundColor: " #1a1a1a" }}>
       <Link to="/" className="navbar-brand">
         <img
           src={logo}
@@ -83,6 +83,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
+} 
 
 export default Navbar;

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router';
-import { Col, Container, FormGroup, Input, Label, Button } from 'reactstrap';
+import { Row,Col, Container, FormGroup, Input, Label, Button } from 'reactstrap';
 import { AuthContext } from '../Auth/AuthContext';
 import Navbar from '../Basic/Navbar';
 
@@ -40,19 +40,32 @@ function PhoneNumber() {
     return (
         <div>
             <Navbar />
-            <Container>
-                <FormGroup row>
-                    <Label for='number' sm={3}>Phone/Mobile Number</Label>
-                    <Col sm={9}>
-                        <Input
+            <Container className="mt-5 p-5 bg-dark text-white w-50 center">
+                <FormGroup >
+
+                    <Row>
+                        <Col >
+                        <Label for='number' ><h5>Phone/Mobile Number</h5> </Label>  
+                        </Col>
+                        <Col  >
+                        <Input 
+                        
                             type='text'
                             name='phone'
                             id='phone'
                             placeholder='provide your phone/mobile number'
+                            
                             onChange={(e) => setNumber(e.target.value)}
                         />
-                    </Col>
-                    <Button block color='primary' onClick={updatePhoneNumber}>Add Phone Number</Button>
+                        </Col>
+                        
+                    </Row>
+                    
+
+                       
+                
+
+                    <Button  className="mt-4" block color='primary' onClick={updatePhoneNumber}>Add Phone Number</Button>
                 </FormGroup>
             </Container>
         </div>

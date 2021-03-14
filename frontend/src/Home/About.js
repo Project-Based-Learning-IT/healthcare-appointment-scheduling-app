@@ -5,7 +5,7 @@ import Image from '../image/doctor.jpg'
 const About=()=>{
 
     return(
-        <div className="row m-3">
+        <div className="row m-2">
   <div className="col-12 col-md-8 text-center pt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae deleniti, blanditiis est harum suscipit accusamus pariatur minus error aliquam quos porro quidem sit, minima nobis quisquam perspiciatis quia amet saepe!
   Soluta itaque totam perferendis, quo voluptas porro cum? Nam nostrum quas aut! Amet et mollitia illo laborum facilis? Quidem provident expedita est inventore libero adipisci eaque qui quia hic. Eligendi.
   Laboriosam atque ea fugit aut ratione excepturi repellat animi nobis magni enim numquam quisquam, iste voluptate laborum obcaecati eaque quis molestias incidunt odio, reiciendis ut facilis rem alias. Aut, modi.
