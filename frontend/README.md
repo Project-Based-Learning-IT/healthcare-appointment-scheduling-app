@@ -10,13 +10,6 @@ npm install (installs all dependancies)
 
 npm start 
 
-## Dependancies
-npm install bootstrap \
-npm install react-router-dom \
-npm install react-datepicker \
-npm install axios \
-npm install react-bootstrap bootstrap 
-
 ## Available Scripts
 
 In the project directory, you can run:
