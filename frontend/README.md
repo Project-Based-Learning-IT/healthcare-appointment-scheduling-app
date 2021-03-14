@@ -5,6 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 
 ## To Run development server
+create .env file and paste contents of env-info.txt \
 npm install (installs all dependancies) 
 
 npm start 

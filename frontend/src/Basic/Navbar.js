@@ -1,7 +1,7 @@
 import React, { Component, useContext } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from '../image/doctorlogo.jpg'
+import logo from "../image/doctorlogo.jpg";
 import { AuthContext } from "../Auth/AuthContext";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
@@ -16,38 +16,38 @@ const Navbar = () => {
       window.localStorage.setItem("googleId", response.googleId);
 
       // Send the received token to the server
-      const serverRes = await axios.post(`${process.env.REACT_APP_SERVER_URL}/patients/google-login/`,
+      const serverRes = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/patients/google-login/`,
         {
-          tokenId: response.tokenId
+          tokenId: response.tokenId,
         }
-      )
-      
-      console.log(serverRes.data.phoneNumberExists)
+      );
+
+      console.log(serverRes.data.phoneNumberExists);
 
       setToken(response.tokenId);
       setGoogleId(response.googleId);
 
-      if(serverRes.data.phoneNumberExists === true){
-        history.push('/patient')
-      }
-      else{
-        history.push('/patient/update-phone')
+      if (serverRes.data.phoneNumberExists === true) {
+        history.push("/patient");
+      } else {
+        history.push("/patient/update-phone");
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const failureResponse = (err) => {
     console.log(err);
-  }
+  };
 
   function logout() {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("googleId");
     setToken(null);
     setGoogleId(null);
-    history.push('/');
+    history.push("/");
   }
 
   return (
@@ -58,31 +58,57 @@ const Navbar = () => {
           alt=""
           width="30"
           height="24"
-          class="d-inline-block align-top mr-2 mt-1"
+          className="d-inline-block align-top mr-2 mt-1"
         ></img>
-          Hospital Mangement System
-        </Link>
-      <div className="collapse navbar-collapse">
+        Hospital Management System
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapsibleNavbar"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+      <div className="collapse navbar-collapse " id="collapsibleNavbar">
         <ul className="navbar-nav ml-auto text-light bg-dark">
-          <li classname="navbar-item">
-            <link to="/" classname="nav-link " />
-            {!token && <GoogleLogin
-              clientId={process.env.REACT_APP_CLIENT_ID}
-              render={(renderProps) => (
-                <button onClick={renderProps.onClick} disabled={false} className="btn btn-outline-primary">Login As A Patient</button>
-              )}
-              onSuccess={successResponse}
-              onFailure={failureResponse}
-              cookiePolicy={'single_host_origin'}
-            />}
-            {token && <button type="button" class="btn btn-outline-primary" onClick={logout}>
-              Logout
-            </button>}
+          <li className="navbar-item" style={{ textAlign: "right" }}>
+            <link to="/" className="nav-link " />
+            {!token && (
+              <GoogleLogin
+                clientId={process.env.REACT_APP_CLIENT_ID}
+                render={(renderProps) => (
+                  <button
+                    onClick={renderProps.onClick}
+                    disabled={false}
+                    className="btn btn-outline-primary"
+                  >
+                    Login As A Patient
+                  </button>
+                )}
+                onSuccess={successResponse}
+                onFailure={failureResponse}
+                cookiePolicy={"single_host_origin"}
+              />
+            )}
+            {token && (
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            )}
           </li>
         </ul>
       </div>
     </nav>
   );
+<<<<<<< HEAD
 } 
+=======
+};
+>>>>>>> b388aed7bb39fa2d9275c7ba1cec813d98bcbb29
 
 export default Navbar;

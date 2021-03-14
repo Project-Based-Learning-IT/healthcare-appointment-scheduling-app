@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import $ from "jquery";
+import Popper from "popper.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -6,24 +11,30 @@ import Home from "./Pages/Home";
 import DoctorLogin from "./Pages/DoctorLogin";
 import DoctorDashboard from "./Pages/DoctorDashboard";
 import PaitentDashboard from "./Pages/PaitentDashboard";
-import { AuthContext } from './Auth/AuthContext'
+import Error from "./Pages/Error";
+import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [googleId, setGoogleId] = useState(window.localStorage.getItem("googleId"));
+  const [googleId, setGoogleId] = useState(
+    window.localStorage.getItem("googleId")
+  );
 
   return (
     <Router>
-      <Switch>
-        <AuthContext.Provider value={{ token, setToken, googleId, setGoogleId }}>
+      <AuthContext.Provider value={{ token, setToken, googleId, setGoogleId }}>
+        <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/doctorlogin" component={DoctorLogin} />
-          <Route exact path="/doctor" component={DoctorDashboard} />
-          <Route exact path="/patient" component={PaitentDashboard} />
-          <Route exact path="/patient/update-phone" component={PhoneNumber} />
-        </AuthContext.Provider>
-      </Switch>
+          <Route path="/doctorlogin" component={DoctorLogin} />
+          <Route path="/doctor" component={DoctorDashboard} />
+          <Route path="/patient" component={PaitentDashboard} />
+          <Route path="/patient/update-phone" component={PhoneNumber} />
+          <Route path="*">
+            <Error />
+          </Route>
+        </Switch>
+      </AuthContext.Provider>
     </Router>
   );
 }
