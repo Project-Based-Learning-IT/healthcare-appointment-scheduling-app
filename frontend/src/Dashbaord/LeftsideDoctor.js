@@ -18,7 +18,10 @@ const LeftsidePatient=()=>{
             
         </li>
         <li style={{textDecoration:"none"}}>
-            <Option Value= "Personal Details" Option="/doctor/perosnaldetails"/>
+            
+            <Link to="/perosnaldetails">
+            <Option Value= "Personal Details"/>
+            </Link>
             
 
         </li >

@@ -3,7 +3,7 @@ import Navbar from '../Basic/Navbar';
 import Leftside from '../Dashbaord/LeftsideDoctor';
 
 import "../Dashbaord/dashboard.css"
-import PersonalDetails from '../Doctor/PersonalDetails';
+
 
 
 const DoctorDashboard=()=>{

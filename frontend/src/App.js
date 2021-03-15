@@ -32,7 +32,7 @@ function App() {
           <Route exact path="/doctor" component={DoctorDashboard} />
           <Route exact path="/patient" component={PaitentDashboard} />
           <Route exact path="/patient/update-phone" component={PhoneNumber} />
-          <Route exact path="/doctor/perosnaldetails" component={PersonalDetails} />
+          <Route exact path="/perosnaldetails" component={PersonalDetails} />
 
           <Route path="*">
             <Error />
