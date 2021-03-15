@@ -13,24 +13,29 @@ const LeftsidePatient=()=>{
     <div>
     <ul className="mt-5" >
         <li>
-            
+        <Link to="/doctor">
             <Option Value= "Today's Schedule" Option="today"/>
+            </Link>
             
         </li>
         <li style={{textDecoration:"none"}}>
             
-            <Link to="/perosnaldetails">
+        <Link to="/doctor/perosnaldetails">
             <Option Value= "Personal Details"/>
             </Link>
             
 
         </li >
         <li style={{textDecoration:"none"}}>
+        <Link to="/doctor/paymenthistory">
             <Option Value= "Payment History"/>
+            </Link>
         </li >
         
         <li style={{textDecoration:"none"}}>
+        <Link to="/doctor/feedback">
             <Option Value= "Feedback"/>
+            </Link>
         </li >
 
         

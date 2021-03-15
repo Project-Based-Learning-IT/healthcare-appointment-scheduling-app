@@ -23,13 +23,16 @@ const PersonalDetails=()=>{
 				<h4 className="card-header">Personal Details</h4>
 				<ul className="list-group">
 					<li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Name: {doctor.name}</span> 
+						<span className="badge badge-success mr-2 p-2">Name:</span>  {doctor.name}
 					</li>
                     <li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2"> Specialization: {doctor.specialization}</span> 
+						<span className="badge badge-success mr-2 p-2"> Specialization: </span> {doctor.specialization}
 					</li>
                     <li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Phone No: {doctor.phoneNumber}</span> 
+						<span className="badge badge-success mr-2 p-2">Phone No: </span> {doctor.phoneNumber}
+					</li>
+					<li className="list-group-item">
+						<span className="badge badge-success mr-2 p-2">Phone No: </span> {doctor. feesPerSession}
 					</li>
 					
 				</ul>
