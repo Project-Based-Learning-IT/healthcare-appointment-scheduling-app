@@ -15,6 +15,7 @@ import Error from "./Pages/Error";
 import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
 import PersonalDetails from "./Doctor/PersonalDetails"
+import SearchDoctor from "./Patient/SearchDoctor";
 
 
 function App() {
@@ -25,11 +26,13 @@ function App() {
 
   return (
     <Router>
+      
       <AuthContext.Provider value={{ token, setToken, googleId, setGoogleId }}>
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/doctorlogin" component={DoctorLogin} />
           <Route exact path="/doctor" component={DoctorDashboard} />
+          <Route exact path="/patient/searchdoctor" component={SearchDoctor} />
           <Route exact path="/patient" component={PaitentDashboard} />
           <Route exact path="/patient/update-phone" component={PhoneNumber} />
           <Route exact path="/doctor/perosnaldetails" component={PersonalDetails} />

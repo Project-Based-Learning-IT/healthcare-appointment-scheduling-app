@@ -13,7 +13,7 @@ const DoctorLogin=()=>{
             <LoginForm/>
             </div>
            
-            <div style={{width: "100%"}}>
+            <div className="fixed-bottom" style={{width: "100%"}}>
             <Footer />
             </div>
             

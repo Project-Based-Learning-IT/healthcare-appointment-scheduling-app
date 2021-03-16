@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
     return (
       
         
-          <div className=" row text-light bg-dark p-5" 
+          <div className=" row text-light bg-dark p-2" 
           style={{maxWidth:"100%",margin:"auto"}}>
          
          <div className="col-12 col-md-6 w-100">

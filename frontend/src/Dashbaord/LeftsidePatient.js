@@ -1,6 +1,8 @@
 import React from "react"
 import Option from "./Option"
 import "./dashboard.css"
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+
 
 
 const LeftsidePatient=()=>{
@@ -9,23 +11,30 @@ const LeftsidePatient=()=>{
    return(
     <div>
     <ul >
+
         <li >
+        <Link to="/patient">
+
             <Option Value= "Personal Details" />
+            </Link>
         </li >
-        <li style={{textDecoration:"none"}}>
+        <li>
+    <Link to="/patient/searchdoctor">
+
             <Option Value= "Search Doctor"/>
+            </Link>
         </li >
-        <li style={{textDecoration:"none"}}>
+        <li>
             <Option Value= "Appointment Status"/>
         </li >
-        <li style={{textDecoration:"none"}}>
+        <li >
             <Option Value= "My Prescription"/>
         </li >
-        <li style={{textDecoration:"none"}}>
+        <li >
             <Option Value= "Previous Appointments"/>
         </li >
 
-        <li style={{textDecoration:"none"}}>
+        <li>
             <Option Value= "Payment Details"/>
         </li >
     
