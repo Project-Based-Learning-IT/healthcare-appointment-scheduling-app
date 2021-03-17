@@ -1,42 +1,34 @@
-import React, { useContext, useMemo, useCallback } from "react";
+import React, { useContext } from "react";
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
-import jwt_decode from "jwt-decode";
-
 import { useState, useEffect } from "react";
 import Axios from "axios";
-
 import "../Dashbaord/dashboard.css";
 import { AuthContext } from "../Auth/AuthContext";
 
 const PersonalDetails = () => {
-  const [Patients, setPatients] = useState([]);
-  const [patient, setpatient] = useState({});
-  const [loading, setloading] = useState(true);
-
-  const { token } = useContext(AuthContext);
-  const Patient = useMemo(() => jwt_decode(token), [token]);
-
-  const fetchPatients = useCallback(async () => {
-    const { data } = await Axios.get(
-      `${process.env.REACT_APP_SERVER_URL}/patients/`
-    );
-    setPatients(data);
-
-    {
-      Patients.map((p) => {
-        if (p.name.localeCompare(Patient.name) === 0) {
-          setpatient(p);
-          setloading(false);
-        }
-      });
-    }
-    //  console.log(data);
-  }, [Patients, Patient.name]);
+  const [patient, setPatient] = useState({});
+  const [loading, setLoading] = useState(true);
+  const { googleId } = useContext(AuthContext);
 
   useEffect(() => {
-    fetchPatients();
-  }, [fetchPatients]);
+    setLoading(true);
+    const getPatientDetails = async () => {
+      const res = await Axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/patients/getPatientDetails/${googleId}`
+      )
+      if (res.status === 200) {
+        setPatient(res.data);
+        window.localStorage.setItem("user", JSON.stringify(res.data));
+        setLoading(false)
+      }
+      else {
+        console.log(res.data.message);
+        setLoading(false);
+      }
+    }
+    getPatientDetails();
+  }, [googleId])
 
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>

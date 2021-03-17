@@ -13,7 +13,13 @@ const LoginForm = () => {
 
 	async function login() {
 		try {
-			const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/doctors/login/${username}/${password}`);
+			const res = await axios.post(
+				`${process.env.REACT_APP_SERVER_URL}/doctors/login/`,
+				{
+					username: username,
+					password: password
+				}
+			);
 			setStatus(res.status);
 
 			const token = res.data.token;
