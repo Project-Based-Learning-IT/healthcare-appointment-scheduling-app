@@ -26,7 +26,6 @@ jobs:
     - run: |
         cd backend
         npm ci
-        echo "URI = $ATLAS_URI"
         npm run build --if-present
         npm test
       env:
