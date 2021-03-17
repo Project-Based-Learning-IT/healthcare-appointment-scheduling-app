@@ -1,3 +1,5 @@
+# Runs on every push and pr
+
 name: Node.js CI
 
 on:
