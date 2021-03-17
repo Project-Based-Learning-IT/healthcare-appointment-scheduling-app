@@ -25,11 +25,11 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: |
         ls -la
-        echo $ATLAS_URI
-        chmod +x run-tests.sh
-        ./run-tests.sh
+        # echo $ATLAS_URI
+        # chmod +x run-tests.sh
+        # ./run-tests.sh
       env:
         CI: true
         ATLAS_URI: ${{ secrets.ATLAS_URI }}
-        ATLAS_TEST_URI: ${{ secrets.ATLAS_TEST_URI }}
+        ATLAS_TEST_URI: ${{ secrets.ATLAS_URI_TEST }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
