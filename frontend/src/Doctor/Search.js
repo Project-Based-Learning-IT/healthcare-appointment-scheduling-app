@@ -44,8 +44,8 @@ const Search = () => {
         </Row>
         <ListGroup>
       
-      {Doctor.map(doc => (
-        <ListGroupItem key={doc.id} className="mb-3">
+      {Doctor.slice(0,5).map(doc => (
+        <ListGroupItem key={doc.id} className="mb-2">
           <div className="text-info"> <h6>Doctor Name:<span className="text-uppercase"> {doc.name}</span></h6> </div>
           <div>Specialization : {doc.specialization}</div>
           <div >Phone Number : {doc.phoneNumber}</div>
