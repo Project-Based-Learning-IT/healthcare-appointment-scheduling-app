@@ -32,5 +32,5 @@ jobs:
       env:
         CI: true
         ATLAS_URI: ${{ secrets.ATLAS_URI }}
-        ATLAS_TEST_URI: ${{ secrets.ATLAS_URI_TEST }}
+        ATLAS_URI_TEST: ${{ secrets.ATLAS_URI_TEST }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
