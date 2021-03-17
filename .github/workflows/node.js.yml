@@ -23,10 +23,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd backend
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: |
+        chmod +x run-tests.sh
+        ./run-tests.sh
       env:
         CI: true
         ATLAS_URI: ${{ secrets.ATLAS_URI }}
