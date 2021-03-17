@@ -24,6 +24,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
+        ls -la
+        echo $ATLAS_URI
         chmod +x run-tests.sh
         ./run-tests.sh
       env:
