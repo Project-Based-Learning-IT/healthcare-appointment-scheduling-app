@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Axios from "axios";
+// import { ListGroup, ListGroupItem } from "reactstrap";
+
 import {
   Row,
   Col,
@@ -9,7 +11,58 @@ import {
   InputGroupAddon,
 } from "reactstrap";
 
+import Trie from "./Trie.js";
+import specialization from "./specialization";
+
 const Search = () => {
+  const [text, setText] = useState();
+  const [suggestions, setSuggestions] = useState([]);
+
+  const memoized_trie = useMemo(() => {
+    const trie = new Trie();
+
+    // Insert
+    for (let i = 0; i < specialization.length; i++) {
+      trie.insert(specialization[i]);
+    }
+
+    return trie;
+  }, []);
+
+  function onTextChanged(e) {
+    let value = e.target.value;
+    setText(value);
+    value = value.toLowerCase();
+    if (value !== "") setSuggestions(memoized_trie.find(value));
+    else setSuggestions([]);
+  }
+
+  function suggestionSelected(value) {
+    setText(value);
+    setSuggestions([]);
+  }
+
+  function renderSuggestions() {
+    if (suggestions.length === 0) {
+      return null;
+    }
+    return (
+      <InputGroup>
+        <ul className="list-group dropdown-menu pt-0 pb-0">
+          {suggestions.map((item) => (
+            <li
+              className="list-group-item list-group-item-action"
+              onClick={() => suggestionSelected(item)}
+              key={item}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      </InputGroup>
+    );
+  }
+
   const [Doctor, setDoctor] = useState([]);
 
   const fetchDoctor = async () => {
@@ -29,11 +82,22 @@ const Search = () => {
       <Row className="mb-3">
         <Col>
           <InputGroup>
-            <Input type="text" placeholder="Search Your Doctor" />
-            <InputGroupAddon addonType="append">
-              <Button color="primary">Search Doctor</Button>
-            </InputGroupAddon>
+            <Input
+              value={text}
+              type="text"
+              placeholder="Search Your Doctor"
+              onChange={onTextChanged}
+              className="mb-1"
+            />
+            <div style={{ height: 10 }} className="">
+              <InputGroupAddon addonType="append">
+                <Button className="h-10 d-inline-block" color="primary">
+                  Search Doctor
+                </Button>
+              </InputGroupAddon>
+            </div>
           </InputGroup>
+          {renderSuggestions()}
         </Col>
       </Row>
       {/* <ListGroup> */}
