@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse " id="collapsibleNavbar">
         <ul className="navbar-nav ml-auto text-light bg-dark">
           <li className="navbar-item" style={{ textAlign: "right" }}>
-            <link to="/" className="nav-link " />
+            <link to="/" className="nav-link " style={{padding: 0}}/>
             {!token && (
               <GoogleLogin
                 clientId={process.env.REACT_APP_CLIENT_ID}
