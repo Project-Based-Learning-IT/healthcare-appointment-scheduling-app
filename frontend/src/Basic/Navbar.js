@@ -1,5 +1,5 @@
-import React, { Component, useContext } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../image/doctorlogo.jpg";
 import { AuthContext } from "../Auth/AuthContext";
