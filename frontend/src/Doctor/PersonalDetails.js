@@ -32,7 +32,7 @@ const PersonalDetails=()=>{
 						<span className="badge badge-success mr-2 p-2">Phone No: </span> {doctor.phoneNumber}
 					</li>
 					<li className="list-group-item">
-						<span className="badge badge-success mr-2 p-2">Phone No: </span> {doctor. feesPerSession}
+						<span className="badge badge-success mr-2 p-2">Fees Per Session: </span> {doctor.feesPerSession}
 					</li>
 					
 				</ul>

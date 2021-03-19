@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link, Redirect, useHistory } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { Redirect, useHistory } from "react-router-dom";
 import { Container, Row, Col, Card, Form, CardHeader, CardBody, FormGroup, CardFooter, Button, Label, Input } from 'reactstrap'
 import axios from 'axios';
 import { AuthContext } from '../Auth/AuthContext';
@@ -13,7 +13,13 @@ const LoginForm = () => {
 
 	async function login() {
 		try {
-			const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/doctors/login/${username}/${password}`);
+			const res = await axios.post(
+				`${process.env.REACT_APP_SERVER_URL}/doctors/login/`,
+				{
+					username: username,
+					password: password
+				}
+			);
 			setStatus(res.status);
 
 			const token = res.data.token;

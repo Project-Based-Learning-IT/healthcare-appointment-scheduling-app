@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from '../Auth/AuthContext';

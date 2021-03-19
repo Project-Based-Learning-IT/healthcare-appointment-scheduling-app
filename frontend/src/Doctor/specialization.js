@@ -5,10 +5,10 @@ emergency medicine
 general practice
 intensive care medicine
 medical administration
-obstetrics and gynaecology
+obstetrics and gynecology
 occupational and environmental medicine
 ophthalmology
-paediatrics and child health
+pediatrics and child health
 pain medicine
 pathology
 physician
@@ -19,4 +19,4 @@ radiology
 rehabilitation medicine
 sexual health medicine
 sport and exercise medicine
-surgery`.split('\n');
+surgery`.split("\n");
