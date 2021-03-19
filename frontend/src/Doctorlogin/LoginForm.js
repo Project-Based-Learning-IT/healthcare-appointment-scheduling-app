@@ -41,8 +41,8 @@ const LoginForm = () => {
 				<Col lg={6} className='offset-lg-3 mt-5 '>
 					<Card>
 						<Form>
-							<CardHeader className=''>SignIn here</CardHeader>
-							<CardBody>
+							<CardHeader className=''>Welcome back, Doc</CardHeader>
+							<CardBody >
 								<FormGroup row>
 									<Label for='email' sm={3}>
 										Username
@@ -74,7 +74,7 @@ const LoginForm = () => {
 								{status === 201 && <p className="warning" style={{ color: "red", fontSize: "15px" }}>Wrong username or password! Please try again</p>}
 							</CardBody>
 							<CardFooter>
-								<Button block color='primary' onClick={login}>
+								<Button block color="primary" onClick={login}>
 									Sign In
 								</Button>
 							</CardFooter>

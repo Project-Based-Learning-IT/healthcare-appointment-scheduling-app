@@ -1,7 +1,7 @@
 import React, { Component, useContext } from "react";
 import { Link, Redirect, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../image/doctorlogo.jpg";
+import logo from "../image/navbaricon1.png";
 import { AuthContext } from "../Auth/AuthContext";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
