@@ -3,51 +3,79 @@ import { Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import logo from "../image/navbaricon1.png";
 import { AuthContext } from "../Auth/AuthContext";
-import GoogleLogin from "react-google-login";
 import axios from "axios";
+// import GoogleLogin from "react-google-login";
+// import axios from "axios";
 
 const Navbar = () => {
   const { token, setToken, setGoogleId } = useContext(AuthContext);
   const history = useHistory();
 
-  const successResponse = async (response) => {
+  async function loginWithGoogle(e) {
     try {
-      window.localStorage.setItem("token", response.tokenId);
-      window.localStorage.setItem("googleId", response.googleId);
+      await window.gapi.auth2.getAuthInstance().signIn();
+      const auth2 = await window.gapi.auth2.getAuthInstance();
+      if (auth2.isSignedIn.get()) {
+        console.log("[Google] Signed in successfully!");
+        var profile = auth2.currentUser.get();
+        console.log(profile);
+        window.localStorage.setItem("token", profile.getAuthResponse().id_token);
+        window.localStorage.setItem("googleId", profile.getId());
 
-      // Send the received token to the server
-      const serverRes = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/patients/google-login/`,
-        {
-          tokenId: response.tokenId,
+        const serverRes = await axios.post(
+          `${process.env.REACT_APP_SERVER_URL}/patients/google-login/`,
+          {
+            tokenId: profile.getAuthResponse().id_token,
+          }
+        );
+
+        if (serverRes) {
+          console.log(serverRes.data.phoneNumberExists);
+
+          setToken(profile.getAuthResponse().id_token);
+          setGoogleId(profile.getId());
+
+          if (serverRes.data.phoneNumberExists === true) {
+            history.push("/patient");
+          } else {
+            history.push("/patient/update-phone");
+          }
         }
-      );
-
-      console.log(serverRes.data.phoneNumberExists);
-
-      setToken(response.tokenId);
-      setGoogleId(response.googleId);
-
-      if (serverRes.data.phoneNumberExists === true) {
-        history.push("/patient");
-      } else {
-        history.push("/patient/update-phone");
+        else {
+          throw "Server Didn't respond"
+        }
       }
     } catch (err) {
-      console.log(err);
+      console.log(`[Google] Some error occurred while signing in! ${err}`);
     }
-  };
+  }
 
-  const failureResponse = (err) => {
-    console.log(err);
-  };
+  function signOutGoogle() {
+    // Different logic for doctor and patient
 
-  function logout() {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("googleId");
-    setToken(null);
-    setGoogleId(null);
-    history.push("/");
+    // Patient logic
+    if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+      window.gapi.auth2.getAuthInstance().signOut().then(() => {
+        console.log("[Google] Signed out successfully!");
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("googleId");
+        setToken(null);
+        setGoogleId(null);
+        history.push("/");
+      }).catch((err) => {
+        console.log(`[Google] Some error occurred while signing out! ${err}`);
+      });
+    }
+
+    // Doctor logic
+    else {
+      window.localStorage.removeItem("token");
+      window.localStorage.removeItem("googleId");
+      console.log("[Doctor] Signed out successfully!");
+      setToken(null);
+      setGoogleId(null);
+      history.push("/");
+    }
   }
 
   return (
@@ -76,29 +104,20 @@ const Navbar = () => {
       <div className="collapse navbar-collapse " id="collapsibleNavbar">
         <ul className="navbar-nav ml-auto text-light bg-dark">
           <li className="navbar-item" style={{ textAlign: "right" }}>
-            <link to="/" className="nav-link " style={{padding: 0}}/>
+            <link to="/" className="nav-link " style={{ padding: 0 }} />
             {!token && (
-              <GoogleLogin
-                clientId={process.env.REACT_APP_CLIENT_ID}
-                render={(renderProps) => (
-                  <button
-                    onClick={renderProps.onClick}
-                    disabled={false}
-                    className="btn btn-outline-primary"
-                  >
-                    Login As A Patient
-                  </button>
-                )}
-                onSuccess={successResponse}
-                onFailure={failureResponse}
-                cookiePolicy={"single_host_origin"}
-              />
+              <button
+                onClick={loginWithGoogle}
+                className="btn btn-outline-primary"
+              >
+                Login As A Patient
+              </button>
             )}
             {token && (
               <button
                 type="button"
                 className="btn btn-outline-primary"
-                onClick={logout}
+                onClick={signOutGoogle}
               >
                 Logout
               </button>
@@ -108,6 +127,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-} 
+}
 
 export default Navbar;

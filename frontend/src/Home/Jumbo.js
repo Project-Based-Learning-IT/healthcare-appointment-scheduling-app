@@ -21,7 +21,7 @@ const Jumbo=()=>{
           }}
         >
           <div style={{width:"100%"}}>
-            <Carousel interval={2000} keyboard={false} pauseOnHover={true}>
+            <Carousel interval={2000} keyboard={false}>
               <Carousel.Item style={{ height: "500px" }}>
                 <img
                   alt = "carousel-image1"
