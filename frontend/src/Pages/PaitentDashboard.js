@@ -74,7 +74,7 @@ const PersonalDetails = () => {
                       <li className="list-group-item">
                         <span className="badge badge-success mr-2 p-2">
                           Name:
-                        </span>{" "}
+                        </span>
                         {patient.name}
                       </li>
                       <li className="list-group-item">
