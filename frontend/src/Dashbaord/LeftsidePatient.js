@@ -1,7 +1,7 @@
 import React from "react"
 import Option from "./Option"
 import "./dashboard.css"
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 

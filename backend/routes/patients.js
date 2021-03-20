@@ -88,4 +88,22 @@ router.route('/google-login').post(async (req, res) => {
     }
 })
 
+router.route('/getPatientDetails/:googleId').get(async (req, res) => {
+    try {
+        const googleId = req.params.googleId;
+        const patient = await Patient.findOne({ googleId : googleId });
+
+        if(patient){
+            return res.status(200).json(patient);
+        }
+        else {
+            return res.status(201).json({message : "Patient not found!"});
+        }
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json({message: err});
+    }
+})
+
 module.exports = router;

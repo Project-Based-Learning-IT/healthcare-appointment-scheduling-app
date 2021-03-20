@@ -58,10 +58,10 @@ router.route('/update').put((req, res) => {
 })
 
 // Doctor login
-router.route('/login/:username/:password').get(async (req, res) => {
+router.route('/login/').post(async (req, res) => {
     try {
-        const username = req.params.username;
-        const password = req.params.password;
+        const username = req.body.username;
+        const password = req.body.password;
 
         const doctor = await Doctor.findOne(
             { 

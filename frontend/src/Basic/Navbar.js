@@ -1,7 +1,7 @@
-import React, { Component, useContext } from "react";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import logo from "../image/doctorlogo.jpg";
+import logo from "../image/navbaricon1.png";
 import { AuthContext } from "../Auth/AuthContext";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
@@ -76,7 +76,7 @@ const Navbar = () => {
       <div className="collapse navbar-collapse " id="collapsibleNavbar">
         <ul className="navbar-nav ml-auto text-light bg-dark">
           <li className="navbar-item" style={{ textAlign: "right" }}>
-            <link to="/" className="nav-link " />
+            <link to="/" className="nav-link " style={{padding: 0}}/>
             {!token && (
               <GoogleLogin
                 clientId={process.env.REACT_APP_CLIENT_ID}

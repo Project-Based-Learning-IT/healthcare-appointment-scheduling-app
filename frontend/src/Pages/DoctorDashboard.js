@@ -10,7 +10,7 @@ const DoctorDashboard=()=>{
 return(
     <div className="bg-dark" style = {{height:"100vh"}}>
         <Navbar/>
-        <div>
+      <div>
       
       <div className="row m-5" style={{maxWidth:"100%"}} >
     <div className="col-3 col-md-3 p-4 bg-white " style = {{height:"80vh"}} ><Leftside/></div>
