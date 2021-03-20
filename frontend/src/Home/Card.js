@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import React, { useContext } from 'react';
-import GoogleLogin from 'react-google-login';
+// import GoogleLogin from 'react-google-login';
 import { Link, useHistory } from "react-router-dom";
 import { AuthContext } from '../Auth/AuthContext';
 import axios from 'axios';
@@ -40,7 +40,8 @@ const Card = ({ login = "Doctor", Image, link }) => {
           }
         }
         else {
-          throw "Server Didn't respond"
+          const err = {err : "Server Didn't respond"}
+          throw err;
         }
       }
     } catch (err) {

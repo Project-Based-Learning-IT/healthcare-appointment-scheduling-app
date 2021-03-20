@@ -14,7 +14,7 @@ import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
 import PersonalDetails from "./Doctor/PersonalDetails"
 import SearchDoctor from "./Patient/SearchDoctor";
-
+import Spinner from 'react-bootstrap/Spinner'
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -31,16 +31,16 @@ function App() {
       window.gapi.load('client:auth2', initClient);
       function initClient() {
         window.gapi.client.init({
-          apiKey: "AIzaSyAJO5wNT_dy2zKYt2Px7ZGvd2tLGyUA6QY",
-          clientId: "365803515308-3pfe8sjf7lvg51hr2it5prlvdcfs1eu9.apps.googleusercontent.com",
-          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-          scope: "https://www.googleapis.com/auth/calendar"
+          apiKey: process.env.REACT_APP_API_KEY,
+          clientId: process.env.REACT_APP_CLIENT_ID,
+          discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
+          scope: process.env.REACT_APP_SCOPE
         }).then(function () {
-          if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
-            console.log(`Is signed in? ${window.gapi.auth2.getAuthInstance().isSignedIn.get()} as ${JSON.stringify(window.gapi.auth2.getAuthInstance().currentUser.get())}`)
+          if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) { 
+            console.log(`Is signed in? ${window.gapi.auth2.getAuthInstance().isSignedIn.get()}`)
           }
           else {
-            console.log("Currently Logged Out!");
+            console.log("Currently Logged Out!!");
           }
           setApiLoaded(true);
         }, function (error) {
@@ -51,9 +51,10 @@ function App() {
       setApiLoaded(true);
     }
     else {
+      console.log("[Google] inside the else block line 54 App.js");
       setApiLoaded(false);
     }
-  }, [window.gapi])
+  }, [])
 
   return apiLoaded ? (
     <Router>
@@ -74,7 +75,11 @@ function App() {
       </AuthContext.Provider>
     </Router>
   ) : (
-    <div>Loading</div>
+    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+      <Spinner animation="border" variant="danger" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div>
   )
 }
 

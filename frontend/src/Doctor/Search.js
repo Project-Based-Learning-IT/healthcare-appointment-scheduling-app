@@ -105,7 +105,7 @@ const Search = () => {
         <div className="row">
           {Doctor.map((doc) => (
             // <ListGroupItem key={doc.id} className="mb-3">
-            <div className="col-sm-6 mb-2">
+            <div className="col-sm-6 mb-2" key={doc._id}>
               <div className="card">
                 <div className="card-body">
                   <div className="text-info">

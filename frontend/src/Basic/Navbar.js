@@ -42,7 +42,8 @@ const Navbar = () => {
           }
         }
         else {
-          throw "Server Didn't respond"
+          const err = {err : "Server Didn't respond"}
+          throw err;
         }
       }
     } catch (err) {
@@ -70,10 +71,8 @@ const Navbar = () => {
     // Doctor logic
     else {
       window.localStorage.removeItem("token");
-      window.localStorage.removeItem("googleId");
       console.log("[Doctor] Signed out successfully!");
       setToken(null);
-      setGoogleId(null);
       history.push("/");
     }
   }
