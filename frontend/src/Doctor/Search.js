@@ -2,42 +2,37 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import {
-    Row,
-    Col,
-    Input,
-    Button,
-    InputGroup,
-    InputGroupAddon
-  } from "reactstrap";
-  
+  Row,
+  Col,
+  Input,
+  Button,
+  InputGroup,
+  InputGroupAddon,
+} from "reactstrap";
 
 const Search = () => {
   const [Doctor, setDoctor] = useState([]);
 
   const fetchDoctor = async () => {
-    const { data } = await Axios.get(`${process.env.REACT_APP_SERVER_URL}/doctors/`);
+    const { data } = await Axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/doctors/`
+    );
     setDoctor(data);
-    console.log(data)
+    console.log(data);
   };
 
   useEffect(() => {
     fetchDoctor();
   }, []);
 
-
   return (
     <div>
-        <Row className="mb-3">
-            <Col>
+      <Row className="mb-3">
+        <Col>
           <InputGroup>
-            <Input
-              type="text"
-              placeholder="Search Your Doctor"
-            />
+            <Input type="text" placeholder="Search Your Doctor" />
             <InputGroupAddon addonType="append">
-              <Button  color="primary">
-                Search Doctor
-              </Button>
+              <Button color="primary">Search Doctor</Button>
             </InputGroupAddon>
           </InputGroup> 
         </Col>     
@@ -51,10 +46,15 @@ const Search = () => {
           <div >Phone Number : {doc.phoneNumber}</div>
           <div >FeesPerSession: {doc.feesPerSession}</div>
 
-        </ListGroupItem>
-      ))}
-    </ListGroup>
-    </div>
+                  </ListGroupItem>
+                 
+               
+          ))}
+           </ListGroup> 
+        </div>
+      
+   
+    
   );
 };
 
