@@ -32,7 +32,6 @@ const Search = () => {
   function onTextChanged(e) {
     let value = e.target.value;
     setText(value);
-    fetchDoctor();
     value = value.toLowerCase();
     if (value !== "") setSuggestions(memoized_trie.find(value));
     else setSuggestions([]);
@@ -74,15 +73,6 @@ const Search = () => {
     console.log(data);
   };
 
-  const UpdateDisplay = (text) => {
-    setDoctor((Doctor) => {
-      return Doctor.filter(
-        (doctor) => doctor.specialization.toLowerCase() === text.toLowerCase()
-      );
-    });
-    console.log(Doctor);
-  };
-
   useEffect(() => {
     fetchDoctor();
   }, []);
@@ -101,11 +91,7 @@ const Search = () => {
             />
             <div style={{ height: 10 }} className="">
               <InputGroupAddon addonType="append">
-                <Button
-                  className="h-10 d-inline-block"
-                  color="primary"
-                  onClick={() => UpdateDisplay(text)}
-                >
+                <Button className="h-10 d-inline-block" color="primary">
                   Search Doctor
                 </Button>
               </InputGroupAddon>
@@ -114,29 +100,31 @@ const Search = () => {
           {renderSuggestions()}
         </Col>
       </Row>
-
       {/* <ListGroup> */}
-      <div className="row">
-        {Doctor.map((doc) => (
-          // <ListGroupItem key={doc.id} className="mb-3">
-          <div className="col-sm-6 mb-2" key={doc._id}>
-            <div className="card">
-              <div className="card-body">
-                <div className="text-info">
-                  <h6>
-                    Doctor Name:
-                    <span className="text-uppercase"> {doc.name}</span>
-                  </h6>
-                </div>
-                <div>Specialization : {doc.specialization}</div>
-                <div>Phone Number : {doc.phoneNumber}</div>
-                <div>FeesPerSession: {doc.feesPerSession}</div>
+      <div className="overflow-auto ">
+        <div className="row">
+          {Doctor.map((doc) => (
+            // <ListGroupItem key={doc.id} className="mb-3">
+            <div className="col-sm-6 mb-2">
+              <div className="card">
+                <div className="card-body">
+                  <div className="text-info">
+                    {" "}
+                    <h6>
+                      Doctor Name:
+                      <span className="text-uppercase"> {doc.name}</span>
+                    </h6>{" "}
+                  </div>
+                  <div>Specialization : {doc.specialization}</div>
+                  <div>Phone Number : {doc.phoneNumber}</div>
+                  <div>FeesPerSession: {doc.feesPerSession}</div>
 
-                {/* </ListGroupItem> */}
+                  {/* </ListGroupItem> */}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {/* </ListGroup> */}
     </div>

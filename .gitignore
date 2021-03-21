@@ -69,6 +69,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
+.env
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -101,4 +102,3 @@ dist
 
 # TernJS port file
 .tern-port
-frontend/package-lock.json
