@@ -136,7 +136,17 @@ const Search = () => {
                   </div>
                   <div>Specialization : {doc.specialization}</div>
                   <div>Phone Number : {doc.phoneNumber}</div>
-                  <div>FeesPerSession: {doc.feesPerSession}</div>
+                  <div class="row mb-0 pb-0">
+                    <div class="col-md-6 ">
+                      FeesPerSession: {doc.feesPerSession}
+                    </div>
+                    <div
+                      className=" col align-self-end col-md-2 offset-md-3 inline"
+                      style={{ textAlign: "center" }}
+                    >
+                      <button className="btn btn-sm btn-primary">Book</button>
+                    </div>
+                  </div>
 
                   {/* </ListGroupItem> */}
                 </div>
