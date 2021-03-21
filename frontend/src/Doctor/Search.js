@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import Axios from "axios";
+import Scrollbar from "react-scrollbars-custom";
 // import { ListGroup, ListGroupItem } from "reactstrap";
 
 import {
@@ -116,28 +117,34 @@ const Search = () => {
       </Row>
 
       {/* <ListGroup> */}
-      <div className="row">
-        {Doctor.map((doc) => (
-          // <ListGroupItem key={doc.id} className="mb-3">
-          <div className="col-sm-6 mb-2" key={doc._id}>
-            <div className="card">
-              <div className="card-body">
-                <div className="text-info">
-                  <h6>
-                    Doctor Name:
-                    <span className="text-uppercase"> {doc.name}</span>
-                  </h6>
-                </div>
-                <div>Specialization : {doc.specialization}</div>
-                <div>Phone Number : {doc.phoneNumber}</div>
-                <div>FeesPerSession: {doc.feesPerSession}</div>
+      <Scrollbar
+        noScrollX
+        style={{ position: "", height: "64vh", width: "144vh" }}
+        className="col-12 col-md-12"
+      >
+        <div className="row">
+          {Doctor.map((doc) => (
+            // <ListGroupItem key={doc.id} className="mb-3">
+            <div className="col-sm-6 mb-2" key={doc._id}>
+              <div className="card">
+                <div className="card-body">
+                  <div className="text-info">
+                    <h6>
+                      Doctor Name:
+                      <span className="text-uppercase"> {doc.name}</span>
+                    </h6>
+                  </div>
+                  <div>Specialization : {doc.specialization}</div>
+                  <div>Phone Number : {doc.phoneNumber}</div>
+                  <div>FeesPerSession: {doc.feesPerSession}</div>
 
-                {/* </ListGroupItem> */}
+                  {/* </ListGroupItem> */}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </Scrollbar>
       {/* </ListGroup> */}
     </div>
   );
