@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
@@ -14,7 +14,7 @@ import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
 import PersonalDetails from "./Doctor/PersonalDetails"
 import SearchDoctor from "./Patient/SearchDoctor";
-
+import Spinner from 'react-bootstrap/Spinner'
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -22,9 +22,42 @@ function App() {
     window.localStorage.getItem("googleId")
   );
 
-  return (
+  const [apiLoaded, setApiLoaded] = useState(false);
+
+  // To load only when gapi is loaded
+  useEffect(() => {
+    if (window.gapi !== undefined) {
+      setApiLoaded(false);
+      window.gapi.load('client:auth2', initClient);
+      function initClient() {
+        window.gapi.client.init({
+          apiKey: process.env.REACT_APP_API_KEY,
+          clientId: process.env.REACT_APP_CLIENT_ID,
+          discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
+          scope: process.env.REACT_APP_SCOPE
+        }).then(function () {
+          if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) { 
+            console.log(`Is signed in? ${window.gapi.auth2.getAuthInstance().isSignedIn.get()}`)
+          }
+          else {
+            console.log("Currently Logged Out!!");
+          }
+          setApiLoaded(true);
+        }, function (error) {
+          console.log(`error ${error}`);
+          setApiLoaded(true);
+        });
+      }
+      setApiLoaded(true);
+    }
+    else {
+      console.log("[Google] inside the else block line 54 App.js");
+      setApiLoaded(false);
+    }
+  }, [])
+
+  return apiLoaded ? (
     <Router>
-      
       <AuthContext.Provider value={{ token, setToken, googleId, setGoogleId }}>
         <Switch>
           <Route exact path="/" component={Home} />
@@ -41,7 +74,13 @@ function App() {
         </Switch>
       </AuthContext.Provider>
     </Router>
-  );
+  ) : (
+    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+      <Spinner animation="border" variant="danger" role="status">
+        <span className="sr-only">Loading...</span>
+      </Spinner>
+    </div>
+  )
 }
 
 export default App;
