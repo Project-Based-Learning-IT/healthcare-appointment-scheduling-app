@@ -16,19 +16,18 @@ const PersonalDetails = () => {
     const getPatientDetails = async () => {
       const res = await Axios.get(
         `${process.env.REACT_APP_SERVER_URL}/patients/getPatientDetails/${googleId}`
-      )
+      );
       if (res.status === 200) {
         setPatient(res.data);
         window.localStorage.setItem("user", JSON.stringify(res.data));
-        setLoading(false)
-      }
-      else {
+        setLoading(false);
+      } else {
         console.log(res.data.message);
         setLoading(false);
       }
-    }
+    };
     getPatientDetails();
-  }, [googleId])
+  }, [googleId]);
 
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>
@@ -66,19 +65,18 @@ const PersonalDetails = () => {
                       <li className="list-group-item">
                         <span className="badge badge-success mr-2 p-2">
                           Name:
-                        </span>{" "}
+                        </span>
                         {patient.name}
                       </li>
                       <li className="list-group-item">
                         <span className="badge badge-success mr-2 p-2">
-                          {" "}
-                          Email:{" "}
-                        </span>{" "}
+                          Email:
+                        </span>
                         {patient.email}
                       </li>
                       <li className="list-group-item">
                         <span className="badge badge-success mr-2 p-2">
-                          Phone No:{" "}
+                          Phone No:
                         </span>
                         {patient.phoneNumber}
                       </li>
