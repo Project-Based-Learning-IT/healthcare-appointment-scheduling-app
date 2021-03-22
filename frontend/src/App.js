@@ -12,9 +12,10 @@ import PaitentDashboard from "./Pages/PaitentDashboard";
 import Error from "./Pages/Error";
 import { AuthContext } from "./Auth/AuthContext";
 import PhoneNumber from "./components/PhoneNumber";
-import PersonalDetails from "./Doctor/PersonalDetails"
+import PersonalDetails from "./Doctor/PersonalDetails";
 import SearchDoctor from "./Patient/SearchDoctor";
-import Spinner from 'react-bootstrap/Spinner'
+import PerviousAppointments from "./Patient/PerviousAppointments";
+import Spinner from "react-bootstrap/Spinner";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -28,33 +29,40 @@ function App() {
   useEffect(() => {
     if (window.gapi !== undefined) {
       setApiLoaded(false);
-      window.gapi.load('client:auth2', initClient);
+      window.gapi.load("client:auth2", initClient);
       function initClient() {
-        window.gapi.client.init({
-          apiKey: process.env.REACT_APP_API_KEY,
-          clientId: process.env.REACT_APP_CLIENT_ID,
-          discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
-          scope: process.env.REACT_APP_SCOPE
-        }).then(function () {
-          if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) { 
-            console.log(`Is signed in? ${window.gapi.auth2.getAuthInstance().isSignedIn.get()}`)
-          }
-          else {
-            console.log("Currently Logged Out!!");
-          }
-          setApiLoaded(true);
-        }, function (error) {
-          console.log(`error ${error}`);
-          setApiLoaded(true);
-        });
+        window.gapi.client
+          .init({
+            apiKey: process.env.REACT_APP_API_KEY,
+            clientId: process.env.REACT_APP_CLIENT_ID,
+            discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
+            scope: process.env.REACT_APP_SCOPE,
+          })
+          .then(
+            function () {
+              if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                console.log(
+                  `Is signed in? ${window.gapi.auth2
+                    .getAuthInstance()
+                    .isSignedIn.get()}`
+                );
+              } else {
+                console.log("Currently Logged Out!!");
+              }
+              setApiLoaded(true);
+            },
+            function (error) {
+              console.log(`error ${error}`);
+              setApiLoaded(true);
+            }
+          );
       }
       setApiLoaded(true);
-    }
-    else {
+    } else {
       console.log("[Google] inside the else block line 54 App.js");
       setApiLoaded(false);
     }
-  }, [])
+  }, []);
 
   return apiLoaded ? (
     <Router>
@@ -66,7 +74,16 @@ function App() {
           <Route exact path="/patient/searchdoctor" component={SearchDoctor} />
           <Route exact path="/patient" component={PaitentDashboard} />
           <Route exact path="/patient/update-phone" component={PhoneNumber} />
-          <Route exact path="/doctor/perosnaldetails" component={PersonalDetails} />
+          <Route
+            exact
+            path="/patient/previousappointments"
+            component={PerviousAppointments}
+          />
+          <Route
+            exact
+            path="/doctor/perosnaldetails"
+            component={PersonalDetails}
+          />
 
           <Route path="*">
             <Error />
@@ -75,12 +92,12 @@ function App() {
       </AuthContext.Provider>
     </Router>
   ) : (
-    <div style={{width: "100%", display: "flex", justifyContent: "center"}}>
+    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
       <Spinner animation="border" variant="danger" role="status">
         <span className="sr-only">Loading...</span>
       </Spinner>
     </div>
-  )
+  );
 }
 
 export default App;
