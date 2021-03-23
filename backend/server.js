@@ -22,15 +22,17 @@ const port = process.env.PORT || 5000;
 let uri = '';
 process.env.NODE_ENV === 'test' ? uri = process.env.ATLAS_URI_TEST : uri = process.env.ATLAS_URI;
 
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
-    if(!err){
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
+    if (!err) {
         console.log("Connection to database successful!");
     }
-}); 
+});
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
     console.log(`NODE_ENV = ${process.env.NODE_ENV}`)
+    const date = new Date()
+    console.log(date)
 })
 
 app.get('/', (req, res) => {
