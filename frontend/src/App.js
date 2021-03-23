@@ -16,6 +16,8 @@ import PersonalDetails from "./Doctor/PersonalDetails";
 import SearchDoctor from "./Patient/SearchDoctor";
 import PerviousAppointments from "./Patient/PerviousAppointments";
 import Spinner from "react-bootstrap/Spinner";
+import Selectdate from "./Patient/Selectdate";
+
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -83,6 +85,11 @@ function App() {
             exact
             path="/doctor/perosnaldetails"
             component={PersonalDetails}
+          />
+          <Route
+            exact
+            path="/patient/selectdate"
+            component={Selectdate}
           />
 
           <Route path="*">

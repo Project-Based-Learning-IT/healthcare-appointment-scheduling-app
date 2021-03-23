@@ -14,6 +14,7 @@ import {
 
 import Trie from "./Trie.js";
 import specialization from "./specialization";
+import { Link } from "react-router-dom";
 
 const Search = () => {
   const [text, setText] = useState();
@@ -143,8 +144,10 @@ const Search = () => {
                     <div
                       className=" col align-self-end col-md-2 offset-md-3 inline"
                       style={{ textAlign: "center" }}
-                    >
-                      <button className="btn btn-sm btn-primary">Book</button>
+                    ><Link to="/patient/selectdate">
+                      <button className="btn btn-sm btn-primary"
+                     
+                      >  Book</button> </Link>
                     </div>
                   </div>
 
