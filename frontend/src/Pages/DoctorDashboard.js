@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsideDoctor";
-import SlotDetails from "../Doctor/SlotDetails";
+import TodaysSchedule from "../Doctor/TodaysSchedule";
 import "../Dashbaord/dashboard.css";
 
 const DoctorDashboard = () => {
@@ -24,7 +24,7 @@ const DoctorDashboard = () => {
               backgroundColor: "#6c757d",
             }}
           >
-            <SlotDetails />
+            <TodaysSchedule />
           </div>
         </div>
       </div>
