@@ -42,7 +42,9 @@ const Selectdate = () => {
               {/* </Col>
             <Col> */}
               <div class="col-4">
-                <Button color="primary">Confirm And Go to Next Step</Button>
+                <Link to="/patient/book-slot">
+                  <Button color="primary">Confirm And Go to Next Step</Button>
+                </Link>
               </div>
               {/* </Col>
           </Row> */}

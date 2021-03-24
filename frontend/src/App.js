@@ -17,7 +17,7 @@ import SearchDoctor from "./Patient/SearchDoctor";
 import PerviousAppointments from "./Patient/PerviousAppointments";
 import Spinner from "react-bootstrap/Spinner";
 import Selectdate from "./Patient/Selectdate";
-
+import BookingSlots from "./Doctor/BookingSlots";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -86,11 +86,8 @@ function App() {
             path="/doctor/perosnaldetails"
             component={PersonalDetails}
           />
-          <Route
-            exact
-            path="/patient/selectdate"
-            component={Selectdate}
-          />
+          <Route exact path="/patient/selectdate" component={Selectdate} />
+          <Route exact path="/patient/book-slot" component={BookingSlots} />
 
           <Route path="*">
             <Error />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SlotDetails = ({ no }) => {
+const TodaysSchedule = ({ no }) => {
   return (
     <table className="table table-hover table-dark">
       <thead>
@@ -31,4 +31,4 @@ const SlotDetails = ({ no }) => {
   );
 };
 
-export default SlotDetails;
+export default TodaysSchedule;
