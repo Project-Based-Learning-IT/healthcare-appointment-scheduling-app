@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const doctors = require('../models/doctor.model');
 const jwt = require('jsonwebtoken');
-const { update } = require('../models/patient.model');
 require('dotenv').config();
-
+const Appointment = require('../models/appointment.model');
 const { Doctor, Slot, DateSchedule } = doctors;
 
 function createDate(date) {
@@ -81,7 +80,7 @@ router.route('/update').put((req, res) => {
 })
 
 // Doctor login
-router.route('/login/').post(async (req, res) => {
+router.route('/login').post(async (req, res) => {
     try {
         const username = req.body.username;
         const password = req.body.password;
@@ -118,10 +117,10 @@ router.route('/login/').post(async (req, res) => {
 // To get the slots available for the date
 router.route('/get-slots').post(async (req, res) => {
     try {
-        const username = req.body.username;
-        const date = req.body.date;
+        const id = req.body.doctorId;   // Doctor's id
+        const date = req.body.date;     // Date to book
 
-        const doctor = await Doctor.findOne({ username: username });
+        const doctor = await Doctor.findOne({ _id: id });
 
         // Doctor not found
         if (doctor === null) {
@@ -164,6 +163,45 @@ router.route('/get-slots').post(async (req, res) => {
             message: err
         })
     }
+})
+
+router.route('/book-slot').post((req, res) => {
+    const patientId = req.body.googleId;        // Patient's google id
+    const patientName = req.body.patientName    // Patient's name
+    const doctorId = req.body.doctorId;         // Doctor's id
+    const slotId = req.body.slotId;             // Id of that particular slot
+    const dateId = req.body.dateId;             // Id of that particular date
+
+    Doctor.findOne({ _id : doctorId }).then(doctor => {
+        const date = doctor.dates.id(dateId);
+        const slot = date.slots.id(slotId);
+        slot.isBooked = true;
+        doctor.save().then(() => {
+            // Create an entry in the appointment database
+            const newAppointment = new Appointment({
+                doctorId,
+                dateId,
+                slotId,
+                patientId,
+                date : date.date,
+                slotTime : slot.time,
+                doctorName : doctor.name,
+                patientName : patientName
+            })
+
+            newAppointment.save().then((appointment) => {
+                return res.status(200).json(appointment)
+            }).catch(err => {
+                console.log(err)
+                res.status(400).json(err);
+            })
+        }).catch(err => {
+            console.log(err);
+            res.status(400).json({
+                message : `An error occurred : ${err}`
+            })
+        })
+    })
 })
 
 module.exports = router;
