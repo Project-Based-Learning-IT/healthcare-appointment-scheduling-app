@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
 import "react-calendar/dist/Calendar.css";
-import { Button} from "reactstrap";
+import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
-
 
 const Selectdate = () => {
   const [date, setDate] = useState(new Date());
 
-  const onChange = date => {
+  const onChange = (date) => {
     setDate(date);
   };
-  var pervious= new Date()
-  pervious.setDate(pervious.getDate()-1)
+  var pervious = new Date();
+  pervious.setDate(pervious.getDate() - 1);
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>
       <Navbar />
@@ -37,16 +36,20 @@ const Selectdate = () => {
             <div className="d-flex justify-content-center">
               {/* <ReactCalendar /> */}
               <div>
-     
-      <Calendar 
-      tileDisabled={({ date}) =>date.getDay()===0 || date < pervious }
-    
-
-      onChange={onChange} value={date} />
-      {console.log(date)}
-      {date.toString()}
-      
-    </div>
+                <Calendar
+                  tileDisabled={({ date }) =>
+                    date.getDay() === 0 || date < pervious
+                  }
+                  onChange={onChange}
+                  value={date}
+                />
+                {console.log(date)}
+                {date.getFullYear().toString() +
+                  "-" +
+                  (date.getMonth() + 1).toString() +
+                  "-" +
+                  date.getDate().toString()}
+              </div>
             </div>
             {/* <Row className="w-100">
             <Col> */}
