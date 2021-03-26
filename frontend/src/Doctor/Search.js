@@ -144,7 +144,7 @@ const Search = () => {
                     <div
                       className=" col align-self-end col-md-2 offset-md-3 inline"
                       style={{ textAlign: "center" }}
-                    ><Link to={{ pathname: "/patient/selectdate", doctor: { doctorId: doc._id } }}>
+                    ><Link to={{ pathname: "/patient/selectdate", doctor: { doctor: doc } }}>
                       <button className="btn btn-sm btn-primary"
                      
                       >  Book</button> </Link>

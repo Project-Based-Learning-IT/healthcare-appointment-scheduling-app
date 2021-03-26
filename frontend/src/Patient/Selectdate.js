@@ -69,7 +69,7 @@ const Selectdate = (props) => {
                     pathname: "/patient/book-slot",
                     state: {
                       date: date,
-                      doctorId: props.location.doctor.doctorId,
+                      doctor: props.location.doctor.doctor,
                     },
                   }}
                 >

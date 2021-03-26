@@ -7,15 +7,15 @@ import Axios from "axios";
 
 const BookingSlots = (props) => {
   // console.log(props.location.state)
-  const { date, doctorId } = props.location.state;
-  console.log("Date: " + date + " DoctorId: " + doctorId);
+  const { date, doctor } = props.location.state;
+  // console.log("Date: " + date + " DoctorId: " + doctorId);
   const [dateId, setdateId] = useState();
   const [Slots, setSlots] = useState([]);
   const fetchDate = async () => {
     const { data } = await Axios.post(
       `${process.env.REACT_APP_SERVER_URL}/doctors/get-slots/`,
       {
-        doctorId: doctorId,
+        doctorId: doctor._id,
         date:
           date.getFullYear().toString() +
           "-" +
@@ -69,7 +69,7 @@ const BookingSlots = (props) => {
                             pathname: "/patient/payment",
                             data: {
                               dateId:dateId,
-                              doctorId:doctorId,
+                              doctor:doctor,
                               slotId:slot._id,
                             },
                           }}
