@@ -1,50 +1,37 @@
-import React from "react"
-import Option from "./Option"
-import "./dashboard.css"
-import { Link } from 'react-router-dom'
+import React from "react";
+import Option from "./Option";
+import "./dashboard.css";
+import { Link } from "react-router-dom";
 
-
-
-const LeftsidePatient=()=>{
-   
-
-
-   return(
+const LeftsideDoctor = () => {
+  return (
     <div>
-    <ul className="mt-5" >
+      <ul className="mt-5">
         <li>
-        <Link to="/doctor">
-            <Option Value= "Today's Schedule" Option="today"/>
-            </Link>
-            
+          <Link to="/doctor">
+            <Option Value="Today's Schedule" Option="today" />
+          </Link>
         </li>
-        <li style={{textDecoration:"none"}}>
-            
-        <Link to="/doctor/perosnaldetails">
-            <Option Value= "Personal Details"/>
-            </Link>
-            
+        <li style={{ textDecoration: "none" }}>
+          <Link to="/doctor/perosnaldetails">
+            <Option Value="Personal Details" />
+          </Link>
+        </li>
 
-        </li >
-        <li style={{textDecoration:"none"}}>
-        <Link to="/doctor/paymenthistory">
-            <Option Value= "Payment History"/>
-            </Link>
-        </li >
-        
-        <li style={{textDecoration:"none"}}>
-        <Link to="/doctor/feedback">
-            <Option Value= "Feedback"/>
-            </Link>
-        </li >
+        <li style={{ textDecoration: "none" }}>
+          <Link to="/doctor/payment-history">
+            <Option Value="Payment History" />
+          </Link>
+        </li>
 
-        
-    
-    </ul>
-    
-</div>
-   )
+        <li style={{ textDecoration: "none" }}>
+          <Link to="/doctor/feedback">
+            <Option Value="Feedback" />
+          </Link>
+        </li>
+      </ul>
+    </div>
+  );
+};
 
-}
-
-export default LeftsidePatient
+export default LeftsideDoctor;
