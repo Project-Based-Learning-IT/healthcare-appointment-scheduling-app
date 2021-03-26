@@ -204,4 +204,16 @@ router.route('/book-slot').post((req, res) => {
     })
 })
 
+router.route('/appointments').post(async (req, res) => {
+    try {
+        const doctorId = req.body.doctorId;
+        const appointments = await Appointment.find({doctorId : doctorId});
+        res.status(200).json(appointments);
+    } 
+    catch(err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+})
+
 module.exports = router;

@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Patient = require('../models/patient.model');
+const Appointment = require('../models/appointment.model');
 const jwt = require('jsonwebtoken');
 
 // To get all the patients
@@ -103,6 +104,18 @@ router.route('/getPatientDetails/:googleId').get(async (req, res) => {
     catch(err){
         console.log(err);
         res.status(400).json({message: err});
+    }
+})
+
+router.route('/appointments').post(async (req, res) => {
+    try {
+        const googleId = req.body.googleId;
+        const appointments = await Appointment.find({patientId : googleId});
+        res.status(200).json(appointments);
+    } 
+    catch(err) {
+        console.log(err)
+        res.status(400).json(err)
     }
 })
 
