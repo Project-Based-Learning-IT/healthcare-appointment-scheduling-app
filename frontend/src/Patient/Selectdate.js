@@ -6,7 +6,7 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
 
-const Selectdate = () => {
+const Selectdate = (props) => {
   const [date, setDate] = useState(new Date());
 
   const onChange = (date) => {
@@ -44,25 +44,35 @@ const Selectdate = () => {
                   value={date}
                 />
                 {console.log(date)}
-                {date.getFullYear().toString() +
-                  "-" +
-                  (date.getMonth() + 1).toString() +
-                  "-" +
-                  date.getDate().toString()}
+                <p class="text-center">
+                  {date.getFullYear().toString() +
+                    "-" +
+                    (date.getMonth() + 1).toString() +
+                    "-" +
+                    date.getDate().toString()}
+                </p>
               </div>
             </div>
             {/* <Row className="w-100">
             <Col> */}
-            <div className="row justify-content-center mt-5">
-              <div class="col-4">
+            <div className="row justify-content-center mt-5 ml-5">
+              <div className="col-2">
                 <Link to="/patient/searchdoctor">
                   <Button color="danger">GO BACK</Button>
                 </Link>
               </div>
               {/* </Col>
             <Col> */}
-              <div class="col-4">
-                <Link to="/patient/book-slot">
+              <div className="col-4">
+                <Link
+                  to={{
+                    pathname: "/patient/book-slot",
+                    state: {
+                      date: date,
+                      doctorId: props.location.doctor.doctorId,
+                    },
+                  }}
+                >
                   <Button color="primary">Confirm And Go to Next Step</Button>
                 </Link>
               </div>
