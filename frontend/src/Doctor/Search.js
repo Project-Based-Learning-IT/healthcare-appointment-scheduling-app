@@ -137,14 +137,14 @@ const Search = () => {
                   </div>
                   <div>Specialization : {doc.specialization}</div>
                   <div>Phone Number : {doc.phoneNumber}</div>
-                  <div class="row mb-0 pb-0">
-                    <div class="col-md-6 ">
+                  <div className="row mb-0 pb-0">
+                    <div className="col-md-6 ">
                       FeesPerSession: {doc.feesPerSession}
                     </div>
                     <div
                       className=" col align-self-end col-md-2 offset-md-3 inline"
                       style={{ textAlign: "center" }}
-                    ><Link to="/patient/selectdate">
+                    ><Link to={{ pathname: "/patient/selectdate", doctor: { doctorId: doc._id } }}>
                       <button className="btn btn-sm btn-primary"
                      
                       >  Book</button> </Link>

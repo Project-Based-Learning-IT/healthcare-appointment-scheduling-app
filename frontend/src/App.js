@@ -18,6 +18,7 @@ import PerviousAppointments from "./Patient/PerviousAppointments";
 import Spinner from "react-bootstrap/Spinner";
 import Selectdate from "./Patient/Selectdate";
 import BookingSlots from "./Doctor/BookingSlots";
+import Payment from "./Patient/Payment";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -88,7 +89,7 @@ function App() {
           />
           <Route exact path="/patient/selectdate" component={Selectdate} />
           <Route exact path="/patient/book-slot" component={BookingSlots} />
-
+          <Route exact path="/patient/payment" component={Payment} />
           <Route path="*">
             <Error />
           </Route>
