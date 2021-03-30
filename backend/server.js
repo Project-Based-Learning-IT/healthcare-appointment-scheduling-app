@@ -28,11 +28,15 @@ mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedT
     }
 });
 
+function getCurrentTime() {
+    const date = new Date()
+    console.log(date)
+}
+
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
     console.log(`NODE_ENV = ${process.env.NODE_ENV}`)
-    const date = new Date()
-    console.log(date)
+    getCurrentTime()
 })
 
 app.get('/', (req, res) => {

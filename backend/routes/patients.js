@@ -41,7 +41,7 @@ router.route('/update-phone').put((req, res) => {
             patient.save().then(() => {
                 res.status(200).json('Patient\'s phone number updated');
             }).catch(err => {
-                res.status(400).json({message: `Error : ${err}`});
+                res.status(400).json({ message: `Error : ${err}` });
             });
         }
     })
@@ -59,31 +59,31 @@ router.route('/google-login').post(async (req, res) => {
         const patient = await Patient.findOne({ googleId: googleId });
 
         // If the patient is not found
-        if(patient === null){
+        if (patient === null) {
             const { email, name, picture } = decoded;
             const newPatient = new Patient({
                 googleId, email, name, picture
             })
             const savedPromise = await newPatient.save();
-            if(savedPromise){
-                return res.status(200).json({ phoneNumberExists : false });
+            if (savedPromise) {
+                return res.status(200).json({ phoneNumberExists: false });
             }
-            else{
+            else {
                 throw savedPromise;
             }
         }
 
         // If the phone number is not present in the database
-        else if(patient.phoneNumber === undefined){
-            return res.status(200).json({ phoneNumberExists : false });
+        else if (patient.phoneNumber === undefined) {
+            return res.status(200).json({ phoneNumberExists: false });
         }
 
         // Patient's phone number already exists in the database
-        else{
-            return res.status(200).json({ phoneNumberExists : true })
+        else {
+            return res.status(200).json({ phoneNumberExists: true })
         }
     }
-    catch(err){
+    catch (err) {
         console.log(err);
         return res.status(400).json(err);
     }
@@ -92,39 +92,88 @@ router.route('/google-login').post(async (req, res) => {
 router.route('/getPatientDetails/:googleId').get(async (req, res) => {
     try {
         const googleId = req.params.googleId;
-        const patient = await Patient.findOne({ googleId : googleId });
+        const patient = await Patient.findOne({ googleId: googleId });
 
-        if(patient){
+        if (patient) {
             return res.status(200).json(patient);
         }
         else {
-            return res.status(201).json({message : "Patient not found!"});
+            return res.status(201).json({ message: "Patient not found!" });
         }
     }
-    catch(err){
+    catch (err) {
         console.log(err);
-        res.status(400).json({message: err});
+        res.status(400).json({ message: err });
     }
 })
 
-router.route('/appointments').post(async (req, res) => {
+router.route('/previous-appointments').post(async (req, res) => {
     try {
         const googleId = req.body.googleId;
-        const appointments = await Appointment.find({patientId : googleId});
-        sortedAppointments = appointments.sort((a, b) => {
-            console.log(`Date 1 : ${a.date} Time 1 : ${a.slotTime}`)
-            console.log(`Date 2 : ${b.date} Time 2 : ${b.slotTime}`)
-            d1 = Date.parse(a.date + 'T' + a.slotTime)
-            d2 = Date.parse(b.date + 'T' + b.slotTime)
-            console.log(d1)
-            console.log(d2)
-            console.log(d2-d1)
-            console.log(new Date("2021"))
-            return d2 - d1
+        const appointments = await Appointment.find({ patientId: googleId });
+
+        // Get current dateTime
+        const date = new Date()
+        let currDateTime = date.getFullYear().toString()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const hour = date.getHours()
+        const minutes = date.getMinutes()
+        const seconds = date.getSeconds()
+
+        currDateTime += month < 10 ?  ('-0' + month.toString()) : '-' + month.toString()
+        currDateTime += day < 10 ?  ('-0' + day.toString()) : '-' + day.toString()
+        currDateTime += hour < 10 ?  ('T0' + hour.toString()) : 'T' + hour.toString()
+        currDateTime += minutes < 10 ?  (':0' + minutes.toString()) : ':' + minutes.toString()
+        currDateTime += seconds < 10 ?  (':0' + seconds.toString()) : ':' + seconds.toString()
+
+        const filteredAppointments = appointments.filter((appointment) => {
+            return Date.parse(currDateTime) >= Date.parse(appointment.date + 'T' + appointment.slotTime)
         })
+
+        const sortedAppointments = filteredAppointments.sort((a, b) => {
+            return Date.parse(b.date + 'T' + b.slotTime) - Date.parse(a.date + 'T' + a.slotTime)
+        })
+
         res.status(200).json(sortedAppointments);
-    } 
-    catch(err) {
+    }
+    catch (err) {
+        console.log(err)
+        res.status(400).json(err)
+    }
+})
+
+router.route('/upcoming-appointments').post(async (req, res) => {
+    try {
+        const googleId = req.body.googleId;
+        const appointments = await Appointment.find({ patientId: googleId });
+
+        // Get current dateTime
+        const date = new Date()
+        let currDateTime = date.getFullYear().toString()
+        const month = date.getMonth() + 1
+        const day = date.getDate()
+        const hour = date.getHours()
+        const minutes = date.getMinutes()
+        const seconds = date.getSeconds()
+
+        currDateTime += month < 10 ?  ('-0' + month.toString()) : '-' + month.toString()
+        currDateTime += day < 10 ?  ('-0' + day.toString()) : '-' + day.toString()
+        currDateTime += hour < 10 ?  ('T0' + hour.toString()) : 'T' + hour.toString()
+        currDateTime += minutes < 10 ?  (':0' + minutes.toString()) : ':' + minutes.toString()
+        currDateTime += seconds < 10 ?  (':0' + seconds.toString()) : ':' + seconds.toString()
+
+        const filteredAppointments = appointments.filter((appointment) => {
+            return Date.parse(currDateTime) <= Date.parse(appointment.date + 'T' + appointment.slotTime)
+        })
+
+        const sortedAppointments = filteredAppointments.sort((a, b) => {
+            return Date.parse(a.date + 'T' + a.slotTime) - Date.parse(b.date + 'T' + b.slotTime)
+        })
+
+        res.status(200).json(sortedAppointments);
+    }
+    catch (err) {
         console.log(err)
         res.status(400).json(err)
     }
