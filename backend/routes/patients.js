@@ -111,7 +111,18 @@ router.route('/appointments').post(async (req, res) => {
     try {
         const googleId = req.body.googleId;
         const appointments = await Appointment.find({patientId : googleId});
-        res.status(200).json(appointments);
+        sortedAppointments = appointments.sort((a, b) => {
+            console.log(`Date 1 : ${a.date} Time 1 : ${a.slotTime}`)
+            console.log(`Date 2 : ${b.date} Time 2 : ${b.slotTime}`)
+            d1 = Date.parse(a.date + 'T' + a.slotTime)
+            d2 = Date.parse(b.date + 'T' + b.slotTime)
+            console.log(d1)
+            console.log(d2)
+            console.log(d2-d1)
+            console.log(new Date("2021"))
+            return d2 - d1
+        })
+        res.status(200).json(sortedAppointments);
     } 
     catch(err) {
         console.log(err)
