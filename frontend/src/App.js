@@ -1,3 +1,4 @@
+/* global gapi */
 import React, { useEffect, useState } from "react";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -20,6 +21,7 @@ import Selectdate from "./Patient/Selectdate";
 import BookingSlots from "./Doctor/BookingSlots";
 import Payment from "./Patient/Payment";
 import DocAppointments from "./Doctor/PaymentHistory";
+import AppointmentStatus from "./Patient/AppointmentStatus";
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -66,6 +68,7 @@ function App() {
       console.log("[Google] inside the else block line 54 App.js");
       setApiLoaded(false);
     }
+
   }, []);
 
   return apiLoaded ? (
@@ -96,6 +99,7 @@ function App() {
           <Route exact path="/patient/selectdate" component={Selectdate} />
           <Route exact path="/patient/book-slot" component={BookingSlots} />
           <Route exact path="/patient/payment" component={Payment} />
+          <Route exact path="/patient/appointment-status" component={AppointmentStatus} />
           <Route path="*">
             <Error />
           </Route>

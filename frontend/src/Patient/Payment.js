@@ -5,17 +5,66 @@ import { Link, useHistory } from "react-router-dom";
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
 
+function getEndDateTime(dateTime) {
+  const hrs = (parseInt(dateTime.split('T')[1].split(':')[0]) + 1).toString().padStart(2, '0')
+  const time = hrs + ':00:00'
+  const date = dateTime.split('T')[0]
+  return date + 'T' + time
+}
+
 const Payment = (props) => {
   const history = useHistory();
-  // console.log(JSON.parse(localStorage.getItem("user")).name);
+
+  function createEvent(id, dateTime, doctorEmail) {
+    var virtualEvent = {
+      'id': id,
+      'summary': 'Appointment',
+      'location': 'Virtual',
+      'description': 'Doctor-Patient appointment',
+      'start': {
+        'dateTime': dateTime,
+        'timeZone': 'Asia/Kolkata'
+      },
+      'end': {
+        'dateTime': getEndDateTime(dateTime),
+        'timeZone': 'Asia/Kolkata'
+      },
+      'conferenceData': {
+        'createRequest': {
+          'requestId': "7qxalsvy0e"
+        }
+      },
+      'attendees': [
+        { 'email': doctorEmail }
+      ],
+      'guestsCanModify': true,
+      'reminders': {
+        'useDefault': false,
+        'overrides': [
+          { 'method': 'email', 'minutes': 24 * 60 },
+          { 'method': 'popup', 'minutes': 15 }
+        ]
+      }
+    };
+
+    var request = window.gapi.client.calendar.events.insert({
+      'calendarId': 'primary',
+      'resource': virtualEvent,
+      'sendUpdates': 'all',
+      'supportsAttachments': true,
+      'conferenceDataVersion': 1
+    });
+
+    request.execute(function (event) {
+      console.log("Executed!")
+      console.log(event);
+    });
+
+  }
 
   const { dateId, doctor, slotId } = props.location.data;
 
   const BookSlot = async () => {
-
-    
-
-
     const { data } = await Axios.post(
       `${process.env.REACT_APP_SERVER_URL}/doctors/book-slot/`,
       {
@@ -26,6 +75,11 @@ const Payment = (props) => {
         doctorId: doctor._id,
       }
     );
+
+    if (data.doctorEmail) {
+      createEvent(data._id, data.date + 'T' + data.slotTime, data.doctorEmail)
+    }
+
     history.push("/patient");
   };
 

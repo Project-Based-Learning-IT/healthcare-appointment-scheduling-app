@@ -193,7 +193,8 @@ router.route("/book-slot").post((req, res) => {
           date: date.date,
           slotTime: slot.time,
           doctorName: doctor.name,
-          patientName: patientName,
+          doctorEmail: doctor.email,
+          patientName: patientName
         });
 
         newAppointment

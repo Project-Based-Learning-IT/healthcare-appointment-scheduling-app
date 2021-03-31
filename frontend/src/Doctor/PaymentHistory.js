@@ -8,17 +8,17 @@ import "../Dashbaord/dashboard.css";
 import Leftside from "../Dashbaord/LeftsideDoctor";
 
 const DocAppointments = () => {
- 
-//   console.log(decoded);
+
+  //   console.log(decoded);
 
   const [Appointments, setAppointments] = useState([]);
 
-    const fetchAppointments = async () => {
-      
-         var token = localStorage.getItem("token");
-         var decoded = jwt_decode(token);
+  const fetchAppointments = async () => {
+
+    var token = localStorage.getItem("token");
+    var decoded = jwt_decode(token);
     const { data } = await Axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/doctors//appointments/`,
+      `${process.env.REACT_APP_SERVER_URL}/doctors/appointments/`,
       {
         doctorId: decoded._id,
       }
