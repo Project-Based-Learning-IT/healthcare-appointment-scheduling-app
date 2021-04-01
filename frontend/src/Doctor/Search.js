@@ -58,7 +58,7 @@ const Search = () => {
               onClick={() => suggestionSelected(item)}
               key={item}
             >
-              {item}
+              {item} 
             </li>
           ))}
         </ul>

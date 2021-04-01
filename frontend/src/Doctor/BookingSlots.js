@@ -77,7 +77,7 @@ const BookingSlots = (props) => {
               </thead>
               <tbody>
                 {Slots.map((slot) => (
-                  <tr>
+                  <tr key={slot._id}>
                     <th scope="row">{slot.time}</th>
                     {slot.isBooked ? (
                       <td>Booked</td>
