@@ -92,11 +92,11 @@ const Payment = (props) => {
  
 const makePayment=async(token)=>{
 
-  const {result}= await Axios.post( `${process.env.REACT_APP_SERVER_URL}/patients/payment`,{
+  const {data}= await Axios.post( `${process.env.REACT_APP_SERVER_URL}/patients/payment`,{
     token, finalBalnce
   })
 
-  console.log(result);
+  console.log(data);
 
   
 
