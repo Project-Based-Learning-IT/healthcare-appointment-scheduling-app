@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
+import StripeCheckoutButton from "react-stripe-checkout";
 
 function getEndDateTime(dateTime) {
   const hrs = (parseInt(dateTime.split('T')[1].split(':')[0]) + 1).toString().padStart(2, '0')
@@ -13,6 +14,7 @@ function getEndDateTime(dateTime) {
 }
 
 const Payment = (props) => {
+  const [finalBalnce, setFinalBalnce] = useState(0)
   const history = useHistory();
 
   function createEvent(id, dateTime, doctorEmail) {
@@ -78,15 +80,32 @@ const Payment = (props) => {
 
     if (data.doctorEmail) {
       createEvent(data._id, data.date + 'T' + data.slotTime, data.doctorEmail)
+    
     }
 
-    history.push("/patient");
+    // history.push("/patient");
   };
+ useEffect(() => {
+   setFinalBalnce(1.18*doctor.feesPerSession)
+ }, [])
+
+ 
+const makePayment=async(token)=>{
+
+  const {result}= await Axios.post( `${process.env.REACT_APP_SERVER_URL}/patients/payment`,{
+    token, finalBalnce
+  })
+
+  console.log(result);
+
+  
+
+}
 
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>
       <Navbar />
-      <div>
+      <div >
         <div className="row m-5" style={{ maxWidth: "100%" }}>
           <div
             className="col-3 col-md-3 p-4 bg-white "
@@ -95,14 +114,14 @@ const Payment = (props) => {
             <Leftside />
           </div>
           <div
-            className="col-9 col-md-9 p-4"
+            className="col-9 col-md-9 p-4 "
             style={{
               border: "15px solid yellow ",
               height: "80vh",
               backgroundColor: "#6c757d",
             }}
           >
-            <div className="container">
+            <div className="container text-white">
               <div className="row">
                 <div className="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
                   <div className="row">
@@ -130,7 +149,7 @@ const Payment = (props) => {
                     <div className="text-center">
                       <h1>Receipt</h1>
                     </div>
-                    <table className="table table-hover">
+                    <table className="table table-hover text-white">
                       <thead>
                         <tr>
                           <th>Doctor Name</th>
@@ -173,6 +192,7 @@ const Payment = (props) => {
                             </p>
                             <p>
                               <strong>{0.18 * doctor.feesPerSession}</strong>
+                              
                             </p>
                           </td>
                         </tr>
@@ -186,12 +206,20 @@ const Payment = (props) => {
                           </td>
                           <td className="text-center text-danger">
                             <h4>
-                              <strong>{1.18 * doctor.feesPerSession}</strong>
+                              
+                              <strong>{finalBalnce}</strong>
                             </h4>
                           </td>
                         </tr>
                       </tbody>
                     </table>
+                    <StripeCheckoutButton
+                     stripeKey="pk_test_51IabQNSCj4BydkZ3VIEbtfIJoWfSESvGSia3mSOfCYPWiyGxNxyr42IRvpmi8f8WbnhzCYBIZMyshg540TErXG3500fbHzRzLc"
+                     token={makePayment}
+                     amount={finalBalnce}
+                     name="Placed Appointment"
+                     shippingAddress
+                     billingAddress>
                     <button
                       type="button"
                       className="btn btn-success btn-lg btn-block"
@@ -200,6 +228,8 @@ const Payment = (props) => {
                       Pay Now&nbsp;&nbsp;&nbsp;
                       <span className="glyphicon glyphicon-chevron-right" />
                     </button>
+                    </StripeCheckoutButton>
+                    
                   </div>
                 </div>
               </div>

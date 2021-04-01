@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const patientsRouter = require('./routes/patients');
 const doctorsRotuer = require('./routes/doctors');
 require('dotenv').config();
-
+ 
 app.use(express.json());
 app.use(cors(
     {

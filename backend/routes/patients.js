@@ -2,6 +2,8 @@ const router = require('express').Router();
 const Patient = require('../models/patient.model');
 const Appointment = require('../models/appointment.model');
 const jwt = require('jsonwebtoken');
+const stripe =require("stripe")("sk_test_51IabQNSCj4BydkZ38AsoDragCM19yaMzGyBVng5KUZnCNrxCJuj308HmdAvoRcUEe2PEdoORMosOaRz1Wl8UX0Gt00FCuSwYpz")
+const uuid = require('uuid/v4');
 
 // To get all the patients
 // ** ONLY FOR TESTING **
@@ -178,5 +180,46 @@ router.route('/upcoming-appointments').post(async (req, res) => {
         res.status(400).json(err)
     }
 })
+
+router.route("/payment").post(async (req,res)=>{
+    const {finalBalnce, token}=req.body;
+    console.log(product);
+  const idempotencyKey = uuid();
+
+  return stripe.customers
+  .create({
+    email: token.email,
+    source: token.id
+  })
+  .then(customer => {
+    stripe.charges
+      .create(
+        {
+          amount: finalBalnce * 100,
+          currency: 'usd',
+          customer: customer.id,
+          receipt_email: token.email,
+          description: `Booked Appointement Successfully`,
+          shipping: {
+            name: token.card.name,
+            address: {
+              line1: token.card.address_line1,
+              line2: token.card.address_line2,
+              city: token.card.address_city,
+              country: token.card.address_country,
+              postal_code: token.card.address_zip
+            }
+          }
+        },
+        {
+          idempotencyKey
+        }
+      )
+      .then(result => res.status(200).json(result))
+      .catch(err => console.log(err));
+  })
+  .catch(console.log("FAILED"));
+})
+
 
 module.exports = router;
