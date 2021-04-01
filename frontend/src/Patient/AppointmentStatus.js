@@ -20,10 +20,7 @@ const AppointmentStatus = () => {
                 return apntmnt.id === id
             })
 
-            const code = meetCode.conferenceData.conferenceId
-
-            console.log(`meet code ${code}`)
-            return `https://meet.google.com/${code}`
+            return meetCode ? meetCode.hangoutLink : "#"
         }
         return '#'
     }
@@ -101,7 +98,7 @@ const AppointmentStatus = () => {
                                         <th scope="row">{Appointment.date}</th>
                                         <th scope="row">{Appointment.slotTime}</th>
                                         <th scope="row">{Appointment.doctorName}</th>
-                                        <th scope="row">Meet <a href={getMeetLink(Appointment._id)}>Link</a></th>
+                                        <th scope="row">Meet <a href={getMeetLink(Appointment._id)} target="_blank">Link</a></th>
                                     </tr>
                                 ))}
                             </tbody>
