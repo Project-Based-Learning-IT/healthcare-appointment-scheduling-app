@@ -12,44 +12,44 @@ const BookingSlots = (props) => {
   const [dateId, setdateId] = useState();
   const [Slots, setSlots] = useState([]);
 
-  function getDateString() {
-    let finalDate = date.getFullYear().toString()
-    const month = date.getMonth() + 1
-    const day = date.getDate();
-
-    if(month < 10) {
-      finalDate += ('-0' + month.toString())
-    }
-    else {
-      finalDate += month.toString()
-    }
-
-    if(day < 10) {
-      finalDate += ('-0' + day.toString())
-    }
-    else {
-      finalDate += day.toString()
-    }
-
-    return finalDate
-
-  }
-
-  const fetchDate = async () => {
-    const { data } = await Axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/doctors/get-slots/`,
-      {
-        doctorId: doctor._id,
-        date: getDateString()
-      }
-    );
-    console.log(data);
-    setdateId(data._id);
-    setSlots(data.slots);
-  };
-
   useEffect(() => {
-    fetchDate();
+    const fetchDate = async (dateToPost) => {
+      const { data } = await Axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/doctors/get-slots/`,
+        {
+          doctorId: doctor._id,
+          date: dateToPost
+        }
+      );
+      console.log(data);
+      setdateId(data._id);
+      setSlots(data.slots);
+    };
+
+    function getDateString() {
+      let finalDate = date.getFullYear().toString()
+      const month = date.getMonth() + 1
+      const day = date.getDate();
+  
+      if(month < 10) {
+        finalDate += ('-0' + month.toString())
+      }
+      else {
+        finalDate += '-' + month.toString()
+      }
+  
+      if(day < 10) {
+        finalDate += ('-0' + day.toString())
+      }
+      else {
+        finalDate += '-' + day.toString()
+      }
+  
+      return finalDate
+  
+    }
+    const dateToSend = getDateString()
+    fetchDate(dateToSend);
   }, []);
 
   return (
