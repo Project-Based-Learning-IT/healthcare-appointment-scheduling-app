@@ -5,63 +5,64 @@ import { Link, useHistory } from "react-router-dom";
 import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
 import StripeCheckoutButton from "react-stripe-checkout";
+import { toast } from "react-toastify";
+// import { Toast } from "react-toastify/dist/components";
 
 function getEndDateTime(dateTime) {
-  const hrs = (parseInt(dateTime.split('T')[1].split(':')[0]) + 1).toString().padStart(2, '0')
-  const time = hrs + ':00:00'
-  const date = dateTime.split('T')[0]
-  return date + 'T' + time
+  const hrs = (parseInt(dateTime.split("T")[1].split(":")[0]) + 1)
+    .toString()
+    .padStart(2, "0");
+  const time = hrs + ":00:00";
+  const date = dateTime.split("T")[0];
+  return date + "T" + time;
 }
 
 const Payment = (props) => {
-  const [finalBalnce, setFinalBalnce] = useState(0)
+  const [finalBalnce, setFinalBalnce] = useState(0);
   const history = useHistory();
 
   function createEvent(id, dateTime, doctorEmail) {
     var virtualEvent = {
-      'id': id,
-      'summary': 'Appointment',
-      'location': 'Virtual',
-      'description': 'Doctor-Patient appointment',
-      'start': {
-        'dateTime': dateTime,
-        'timeZone': 'Asia/Kolkata'
+      id: id,
+      summary: "Appointment",
+      location: "Virtual",
+      description: "Doctor-Patient appointment",
+      start: {
+        dateTime: dateTime,
+        timeZone: "Asia/Kolkata",
       },
-      'end': {
-        'dateTime': getEndDateTime(dateTime),
-        'timeZone': 'Asia/Kolkata'
+      end: {
+        dateTime: getEndDateTime(dateTime),
+        timeZone: "Asia/Kolkata",
       },
-      'conferenceData': {
-        'createRequest': {
-          'requestId': "7qxalsvy0e"
-        }
+      conferenceData: {
+        createRequest: {
+          requestId: "7qxalsvy0e",
+        },
       },
-      'attendees': [
-        { 'email': doctorEmail }
-      ],
-      'guestsCanModify': true,
-      'reminders': {
-        'useDefault': false,
-        'overrides': [
-          { 'method': 'email', 'minutes': 24 * 60 },
-          { 'method': 'popup', 'minutes': 15 }
-        ]
-      }
+      attendees: [{ email: doctorEmail }],
+      guestsCanModify: true,
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: "email", minutes: 24 * 60 },
+          { method: "popup", minutes: 15 },
+        ],
+      },
     };
 
     var request = window.gapi.client.calendar.events.insert({
-      'calendarId': 'primary',
-      'resource': virtualEvent,
-      'sendUpdates': 'all',
-      'supportsAttachments': true,
-      'conferenceDataVersion': 1
+      calendarId: "primary",
+      resource: virtualEvent,
+      sendUpdates: "all",
+      supportsAttachments: true,
+      conferenceDataVersion: 1,
     });
 
     request.execute(function (event) {
-      console.log("Executed!")
+      console.log("Executed!");
       console.log(event);
     });
-
   }
 
   const { dateId, doctor, slotId } = props.location.data;
@@ -79,33 +80,38 @@ const Payment = (props) => {
     );
 
     if (data.doctorEmail) {
-      createEvent(data._id, data.date + 'T' + data.slotTime, data.doctorEmail)
-    
+      createEvent(data._id, data.date + "T" + data.slotTime, data.doctorEmail);
+    }
+  };
+  useEffect(() => {
+    setFinalBalnce(1.18 * doctor.feesPerSession);
+  }, []);
+
+  const makePayment = async (token) => {
+    const { data } = await Axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/patients/payment`,
+      {
+        token,
+        finalBalnce,
+      }
+    );
+
+    if (data) {
+      BookSlot();
+      setFinalBalnce(0);
+toast("Appointment booed successfully",{
+  type:"success"
+})
+      history.push("/patient");
     }
 
-    // history.push("/patient");
+    console.log(data);
   };
- useEffect(() => {
-   setFinalBalnce(1.18*doctor.feesPerSession)
- }, [])
-
- 
-const makePayment=async(token)=>{
-
-  const {data}= await Axios.post( `${process.env.REACT_APP_SERVER_URL}/patients/payment`,{
-    token, finalBalnce
-  })
-
-  console.log(data);
-
-  
-
-}
 
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>
       <Navbar />
-      <div >
+      <div>
         <div className="row m-5" style={{ maxWidth: "100%" }}>
           <div
             className="col-3 col-md-3 p-4 bg-white "
@@ -192,7 +198,6 @@ const makePayment=async(token)=>{
                             </p>
                             <p>
                               <strong>{0.18 * doctor.feesPerSession}</strong>
-                              
                             </p>
                           </td>
                         </tr>
@@ -206,7 +211,6 @@ const makePayment=async(token)=>{
                           </td>
                           <td className="text-center text-danger">
                             <h4>
-                              
                               <strong>{finalBalnce}</strong>
                             </h4>
                           </td>
@@ -214,22 +218,21 @@ const makePayment=async(token)=>{
                       </tbody>
                     </table>
                     <StripeCheckoutButton
-                     stripeKey="pk_test_51IabQNSCj4BydkZ3VIEbtfIJoWfSESvGSia3mSOfCYPWiyGxNxyr42IRvpmi8f8WbnhzCYBIZMyshg540TErXG3500fbHzRzLc"
-                     token={makePayment}
-                     amount={finalBalnce}
-                     name="Placed Appointment"
-                     shippingAddress
-                     billingAddress>
-                    <button
-                      type="button"
-                      className="btn btn-success btn-lg btn-block"
-                      onClick={BookSlot}
+                      stripeKey="pk_test_51IabQNSCj4BydkZ3VIEbtfIJoWfSESvGSia3mSOfCYPWiyGxNxyr42IRvpmi8f8WbnhzCYBIZMyshg540TErXG3500fbHzRzLc"
+                      token={makePayment}
+                      amount={finalBalnce * 100}
+                      name="Placed Appointment"
+                      shippingAddress
+                      billingAddress
                     >
-                      Pay Now&nbsp;&nbsp;&nbsp;
-                      <span className="glyphicon glyphicon-chevron-right" />
-                    </button>
+                      <button
+                        type="button"
+                        className="btn btn-success btn-lg btn-block"
+                      >
+                        Pay Now&nbsp;&nbsp;&nbsp;
+                        <span className="glyphicon glyphicon-chevron-right" />
+                      </button>
                     </StripeCheckoutButton>
-                    
                   </div>
                 </div>
               </div>

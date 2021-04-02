@@ -29,9 +29,7 @@ const LeftsidePatient = () => {
           </Link>
         </li>
 
-        <li>
-          <Option Value="Payment Details" />
-        </li>
+       
       </ul>
     </div>
   );

@@ -12,14 +12,16 @@ const TodaysSchedule = () => {
     var token = localStorage.getItem("token");
     var decoded = jwt_decode(token);
     const { data } = await Axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/doctors//appointments/`,
+      `${process.env.REACT_APP_SERVER_URL}/doctors/appointments`,
       {
         doctorId: decoded._id,
       }
     );
     // console.log(data);
-    // console.log(date);
+    console.log(date);
     setAppointments(data);
+    console.log(Appointments);
+
     setAppointments((Appointments) => {
       return Appointments.filter(
         (Appointment) =>
@@ -31,6 +33,8 @@ const TodaysSchedule = () => {
             date.getDate().toString()
       );
     });
+    console.log(Appointments);
+
   };
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const TodaysSchedule = () => {
       </thead>
       <tbody>
         {Appointments.map((Appointment) => (
-          <tr>
+          <tr key={Appointment._id} >
             <th scope="row">{Appointment.date}</th>
             <th scope="row">{Appointment.slotTime}</th>
             <th scope="row">{Appointment.patientName}</th>
