@@ -20,7 +20,7 @@ const LeftsideDoctor = () => {
 
         <li style={{ textDecoration: "none" }}>
           <Link to="/doctor/payment-history">
-            <Option Value="Payment History" />
+            <Option Value="Appointment History" />
           </Link>
         </li>
 

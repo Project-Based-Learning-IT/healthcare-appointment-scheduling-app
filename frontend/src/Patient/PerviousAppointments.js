@@ -57,7 +57,7 @@ const PatientAppointments = () => {
               </thead>
               <tbody>
                 {Appointments.map((Appointment) => (
-                  <tr key={Appointment._id}>
+                  <tr key={Appointment._id} >
                     <th scope="row">{Appointment.date}</th>
                     <th scope="row">{Appointment.slotTime}</th>
                     <th scope="row">{Appointment.doctorName}</th>
