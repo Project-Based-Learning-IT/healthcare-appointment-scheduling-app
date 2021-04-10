@@ -74,6 +74,11 @@ const LoginForm = () => {
 											id='password'
 											placeholder='your password here'
 											onChange={(e) => setPassword(e.target.value)}
+											onKeyPress={(target) => {
+												if (target.charCode == 13) {
+                          							login();
+                        					}
+											} }
 										/>
 									</Col>
 								</FormGroup>
