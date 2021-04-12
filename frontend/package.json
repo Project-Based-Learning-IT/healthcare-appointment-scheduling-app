@@ -22,6 +22,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-scrollbars-custom": "^4.0.25",
+    "react-star-picker": "^2.0.4",
     "react-stripe-checkout": "^2.6.3",
     "react-toastify": "^7.0.3",
     "reactstrap": "^8.9.0",

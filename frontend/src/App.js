@@ -101,7 +101,7 @@ function App() {
           <Route exact path="/patient/book-slot" component={BookingSlots} />
           <Route exact path="/patient/payment" component={Payment} />
           <Route exact path="/patient/appointment-status" component={AppointmentStatus} />
-          <Route exact path="/patient/feedback" component={Pfeedback} />
+          <Route exact path="/patient/feedback/:id" component={Pfeedback} />
 
           <Route path="*">
             <Error />
