@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
 import Scrollbar from "react-scrollbars-custom";
-
+import { BsPencilSquare } from "react-icons/bs";
 import Navbar from "../Basic/Navbar";
 import "../Dashbaord/dashboard.css";
 
 import Leftside from "../Dashbaord/LeftsidePatient";
+
+import { Link } from "react-router-dom";
 
 const PatientAppointments = () => {
   
@@ -59,6 +61,7 @@ const PatientAppointments = () => {
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Doctor Name</th>
+                    <th scope="col">Feedback</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -67,6 +70,12 @@ const PatientAppointments = () => {
                       <th scope="row">{Appointment.date}</th>
                       <th scope="row">{Appointment.slotTime}</th>
                       <th scope="row">{Appointment.doctorName}</th>
+                      <th scope="row">
+                        <Link to="/patient/feedback">
+                        <BsPencilSquare/>
+                        </Link>
+                        </th>
+
                     </tr>
                   ))}
                 </tbody>
