@@ -222,7 +222,15 @@ router.route("/appointments").post(async (req, res) => {
     const appointments = await Appointment.find({
       doctorId: doctorId,
     });
-    res.status(200).json(appointments);
+    // res.status(200).json(appointments);
+    const sortedAppointments = appointments.sort((a, b) => {
+      return (
+        Date.parse(b.date + "T" + b.slotTime) -
+        Date.parse(a.date + "T" + a.slotTime)
+      );
+    });
+
+    res.status(200).json(sortedAppointments);
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
