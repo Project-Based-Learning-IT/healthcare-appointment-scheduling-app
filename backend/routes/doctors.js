@@ -194,7 +194,7 @@ router.route("/book-slot").post((req, res) => {
           slotTime: slot.time,
           doctorName: doctor.name,
           doctorEmail: doctor.email,
-          patientName: patientName
+          patientName: patientName,
         });
 
         newAppointment

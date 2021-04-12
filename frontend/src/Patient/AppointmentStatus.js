@@ -98,7 +98,7 @@ const AppointmentStatus = () => {
                                         <th scope="row">{Appointment.date}</th>
                                         <th scope="row">{Appointment.slotTime}</th>
                                         <th scope="row">{Appointment.doctorName}</th>
-                                        <th scope="row">Meet <a href={getMeetLink(Appointment._id)} target="_blank">Link</a></th>
+                                        <th scope="row"> <a href={getMeetLink(Appointment._id)} target="_blank">Join Meet</a></th>
                                     </tr>
                                 ))}
                             </tbody>
