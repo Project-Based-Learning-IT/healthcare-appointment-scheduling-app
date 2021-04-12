@@ -22,6 +22,7 @@ import BookingSlots from "./Doctor/BookingSlots";
 import Payment from "./Patient/Payment";
 import DocAppointments from "./Doctor/PaymentHistory";
 import AppointmentStatus from "./Patient/AppointmentStatus";
+import Pfeedback from './Patient/Feedback'
 
 function App() {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
@@ -100,6 +101,8 @@ function App() {
           <Route exact path="/patient/book-slot" component={BookingSlots} />
           <Route exact path="/patient/payment" component={Payment} />
           <Route exact path="/patient/appointment-status" component={AppointmentStatus} />
+          <Route exact path="/patient/feedback" component={Pfeedback} />
+
           <Route path="*">
             <Error />
           </Route>
