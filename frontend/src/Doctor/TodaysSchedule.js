@@ -18,23 +18,23 @@ const TodaysSchedule = () => {
       }
     );
     // console.log(data);
-    console.log(date);
+    // console.log(date);
+
     setAppointments(data);
-    console.log(Appointments);
+    // console.log(Appointments);
+
+    let currDate = date.getFullYear().toString();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    currDate += month < 10 ? "-0" + month.toString() : "-" + month.toString();
+    currDate += day < 10 ? "-0" + day.toString() : "-" + day.toString();
 
     setAppointments((Appointments) => {
       return Appointments.filter(
-        (Appointment) =>
-          Appointment.date ===
-          date.getFullYear().toString() +
-            "-" +
-            (date.getMonth() + 1).toString() +
-            "-" +
-            date.getDate().toString()
+        (Appointment) => Appointment.date === currDate
       );
     });
     console.log(Appointments);
-
   };
 
   useEffect(() => {
@@ -53,11 +53,17 @@ const TodaysSchedule = () => {
       </thead>
       <tbody>
         {Appointments.map((Appointment) => (
-          <tr key={Appointment._id} >
+          <tr key={Appointment._id}>
             <th scope="row">{Appointment.date}</th>
             <th scope="row">{Appointment.slotTime}</th>
             <th scope="row">{Appointment.patientName}</th>
-            <th scope="row">Join</th>
+            <th scope="row">
+              {" "}
+              {/* <a href={getMeetLink(Appointment._id)} target="_blank"> */}
+              <a>
+                Join Meet
+              </a>
+            </th>
           </tr>
         ))}
       </tbody>
