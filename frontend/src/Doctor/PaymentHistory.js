@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
+import Scrollbar from "react-scrollbars-custom";
 
 import Navbar from "../Basic/Navbar";
 import "../Dashbaord/dashboard.css";
@@ -43,31 +44,37 @@ const DocAppointments = () => {
             <Leftside />
           </div>
           <div
-            className="col-9 col-md-9 p-4"
+            className="col-9 col-md-9 p-3"
             style={{
               border: "15px solid yellow ",
               height: "80vh",
               backgroundColor: "#6c757d",
             }}
           >
-            <table className="table table-hover table-dark">
-              <thead>
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Time</th>
-                  <th scope="col">Patient Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Appointments.map((Appointment) => (
+            <Scrollbar
+              noScrollX
+              style={{ position: "", height: "73vh", width: "150vh" }}
+              className="col-12 col-md-12"
+            >
+              <table className="table table-hover table-dark">
+                <thead>
                   <tr>
-                    <th scope="row">{Appointment.date}</th>
-                    <th scope="row">{Appointment.slotTime}</th>
-                    <th scope="row">{Appointment.patientName}</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Patient Name</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {Appointments.map((Appointment) => (
+                    <tr>
+                      <th scope="row">{Appointment.date}</th>
+                      <th scope="row">{Appointment.slotTime}</th>
+                      <th scope="row">{Appointment.patientName}</th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Scrollbar>
           </div>
         </div>
       </div>
