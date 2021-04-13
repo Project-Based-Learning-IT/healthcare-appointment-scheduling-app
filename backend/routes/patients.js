@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const Patient = require('../models/patient.model');
-const Appointment = require('../models/appointment.model');
+const appointmentImport = require('../models/appointment.model');
 const jwt = require('jsonwebtoken');
-const stripe =require("stripe")("sk_test_51IabQNSCj4BydkZ38AsoDragCM19yaMzGyBVng5KUZnCNrxCJuj308HmdAvoRcUEe2PEdoORMosOaRz1Wl8UX0Gt00FCuSwYpz")
+const stripe = require("stripe")("sk_test_51IabQNSCj4BydkZ38AsoDragCM19yaMzGyBVng5KUZnCNrxCJuj308HmdAvoRcUEe2PEdoORMosOaRz1Wl8UX0Gt00FCuSwYpz")
 const { v4: uuidv4 } = require('uuid');
+const { Appointment } = appointmentImport;
 
 // To get all the patients
 // ** ONLY FOR TESTING **
@@ -123,11 +124,11 @@ router.route('/previous-appointments').post(async (req, res) => {
         const minutes = date.getMinutes()
         const seconds = date.getSeconds()
 
-        currDateTime += month < 10 ?  ('-0' + month.toString()) : '-' + month.toString()
-        currDateTime += day < 10 ?  ('-0' + day.toString()) : '-' + day.toString()
-        currDateTime += hour < 10 ?  ('T0' + hour.toString()) : 'T' + hour.toString()
-        currDateTime += minutes < 10 ?  (':0' + minutes.toString()) : ':' + minutes.toString()
-        currDateTime += seconds < 10 ?  (':0' + seconds.toString()) : ':' + seconds.toString()
+        currDateTime += month < 10 ? ('-0' + month.toString()) : '-' + month.toString()
+        currDateTime += day < 10 ? ('-0' + day.toString()) : '-' + day.toString()
+        currDateTime += hour < 10 ? ('T0' + hour.toString()) : 'T' + hour.toString()
+        currDateTime += minutes < 10 ? (':0' + minutes.toString()) : ':' + minutes.toString()
+        currDateTime += seconds < 10 ? (':0' + seconds.toString()) : ':' + seconds.toString()
 
         const filteredAppointments = appointments.filter((appointment) => {
             return Date.parse(currDateTime) >= Date.parse(appointment.date + 'T' + appointment.slotTime)
@@ -159,11 +160,11 @@ router.route('/upcoming-appointments').post(async (req, res) => {
         const minutes = date.getMinutes()
         const seconds = date.getSeconds()
 
-        currDateTime += month < 10 ?  ('-0' + month.toString()) : '-' + month.toString()
-        currDateTime += day < 10 ?  ('-0' + day.toString()) : '-' + day.toString()
-        currDateTime += hour < 10 ?  ('T0' + hour.toString()) : 'T' + hour.toString()
-        currDateTime += minutes < 10 ?  (':0' + minutes.toString()) : ':' + minutes.toString()
-        currDateTime += seconds < 10 ?  (':0' + seconds.toString()) : ':' + seconds.toString()
+        currDateTime += month < 10 ? ('-0' + month.toString()) : '-' + month.toString()
+        currDateTime += day < 10 ? ('-0' + day.toString()) : '-' + day.toString()
+        currDateTime += hour < 10 ? ('T0' + hour.toString()) : 'T' + hour.toString()
+        currDateTime += minutes < 10 ? (':0' + minutes.toString()) : ':' + minutes.toString()
+        currDateTime += seconds < 10 ? (':0' + seconds.toString()) : ':' + seconds.toString()
 
         const filteredAppointments = appointments.filter((appointment) => {
             return Date.parse(currDateTime) <= Date.parse(appointment.date + 'T' + appointment.slotTime)
@@ -181,44 +182,50 @@ router.route('/upcoming-appointments').post(async (req, res) => {
     }
 })
 
-router.route("/payment").post(async (req,res)=>{
-    const {finalBalnce, token}=req.body;
+router.route("/payment").post(async (req, res) => {
+    const { finalBalnce, token } = req.body;
     // console.log(product);
-  const idempotencyKey = uuidv4();
+    const idempotencyKey = uuidv4();
 
-  return stripe.customers
-  .create({
-    email: token.email,
-    source: token.id
-  })
-  .then(customer => {
-    stripe.charges
-      .create(
-        {
-          amount: finalBalnce * 100,
-          currency: 'usd',
-          customer: customer.id,
-          receipt_email: token.email,
-          description: `Booked Appointement Successfully`,
-          shipping: {
-            name: token.card.name,
-            address: {
-              line1: token.card.address_line1,
-              line2: token.card.address_line2,
-              city: token.card.address_city,
-              country: token.card.address_country,
-              postal_code: token.card.address_zip
-            }
-          }
-        },
-        {
-          idempotencyKey
-        }
-      )
-      .then(result => res.status(200).json(result))
-      .catch(err => console.log(err));
-  })
-  .catch(console.log("FAILED"));
+    return stripe.customers
+        .create({
+            email: token.email,
+            source: token.id
+        })
+        .then(customer => {
+            stripe.charges
+                .create(
+                    {
+                        amount: finalBalnce * 100,
+                        currency: 'usd',
+                        customer: customer.id,
+                        receipt_email: token.email,
+                        description: `Booked Appointement Successfully`,
+                        shipping: {
+                            name: token.card.name,
+                            address: {
+                                line1: token.card.address_line1,
+                                line2: token.card.address_line2,
+                                city: token.card.address_city,
+                                country: token.card.address_country,
+                                postal_code: token.card.address_zip
+                            }
+                        }
+                    },
+                    {
+                        idempotencyKey
+                    }
+                )
+                .then(result => res.status(200).json(result))
+                .catch(err => {
+                    console.log(`Error : ${err}`);
+                    res.status(400).json(err);
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(400).json(err);
+        });
 })
 
 

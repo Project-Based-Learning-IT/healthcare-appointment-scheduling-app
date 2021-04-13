@@ -2,12 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
-
 import Navbar from "../Basic/Navbar";
 import "../Dashbaord/dashboard.css";
-
 import Leftside from "../Dashbaord/LeftsidePatient";
-import App from "../App";
 
 const AppointmentStatus = () => {
     const [appointments, setAppointments] = useState([]);
@@ -36,25 +33,25 @@ const AppointmentStatus = () => {
                 }
             );
             
-            const response = await window.gapi.client.calendar.events.list({
-                'calendarId': 'primary',
-                'timeMin': (new Date()).toISOString(),
-                'showDeleted': false,
-                'singleEvents': true,
-                'maxResults': 100,
-                'orderBy': 'startTime'
-            })
+            // const response = await window.gapi.client.calendar.events.list({
+            //     'calendarId': 'primary',
+            //     'timeMin': (new Date()).toISOString(),
+            //     'showDeleted': false,
+            //     'singleEvents': true,
+            //     'maxResults': 100,
+            //     'orderBy': 'startTime'
+            // })
 
-            // Filter google calendar events
-            const events = response.result.items
-            const filteredEvents = events.filter((event) => {
-                return data.find((it) => it._id === event.id)
-            })
+            // // Filter google calendar events
+            // const events = response.result.items
+            // const filteredEvents = events.filter((event) => {
+            //     return data.find((it) => it._id === event.id)
+            // })
 
             console.log(data)
             setAppointments(data);
-            console.log(filteredEvents)
-            setFilteredAppointments(filteredEvents)
+            // console.log(filteredEvents)
+            // setFilteredAppointments(filteredEvents)
         };
 
         fetchAppointments()
@@ -98,7 +95,7 @@ const AppointmentStatus = () => {
                                         <th scope="row">{Appointment.date}</th>
                                         <th scope="row">{Appointment.slotTime}</th>
                                         <th scope="row">{Appointment.doctorName}</th>
-                                        <th scope="row"> <a href={getMeetLink(Appointment._id)} target="_blank">Join Meet</a></th>
+                                        <th scope="row"> <a href={Appointment.googleMeetLink} target="_blank">Join Meet</a></th>
                                     </tr>
                                 ))}
                             </tbody>

@@ -6,6 +6,7 @@ import Navbar from "../Basic/Navbar";
 import Leftside from "../Dashbaord/LeftsidePatient";
 import StripeCheckoutButton from "react-stripe-checkout";
 import { toast } from "react-toastify";
+import axios from "axios";
 // import { Toast } from "react-toastify/dist/components";
 
 function getEndDateTime(dateTime) {
@@ -61,13 +62,26 @@ const Payment = (props) => {
 
     request.execute(function (event) {
       console.log("Executed!");
-      console.log(event);
+
+      // Add meet link
+      if (event) {
+        // console.log(`AddEvent link : ${event.hangoutLink}, Id : ${id}`)
+        axios.put(
+          `${process.env.REACT_APP_SERVER_URL}/appointments/add-meet-link`,
+          {
+            appointmentId: id,
+            meetLink: event.hangoutLink
+          }
+        ).then((x) => {
+          console.log(`Updated Meet Link!`);
+        })
+      }
     });
   }
 
   const { dateId, doctor, slotId } = props.location.data;
 
-  const BookSlot = async () => {
+  const bookSlot = async () => {
     const { data } = await Axios.post(
       `${process.env.REACT_APP_SERVER_URL}/doctors/book-slot/`,
       {
@@ -83,6 +97,7 @@ const Payment = (props) => {
       createEvent(data._id, data.date + "T" + data.slotTime, data.doctorEmail);
     }
   };
+
   useEffect(() => {
     setFinalBalnce(1.18 * doctor.feesPerSession);
   }, []);
@@ -97,11 +112,11 @@ const Payment = (props) => {
     );
 
     if (data) {
-      BookSlot();
+      bookSlot();
       setFinalBalnce(0);
-toast("Appointment booed successfully",{
-  type:"success"
-})
+      toast("Appointment booked successfully", {
+        type: "success"
+      })
       history.push("/patient");
     }
 
@@ -221,7 +236,7 @@ toast("Appointment booed successfully",{
                       stripeKey="pk_test_51IabQNSCj4BydkZ3VIEbtfIJoWfSESvGSia3mSOfCYPWiyGxNxyr42IRvpmi8f8WbnhzCYBIZMyshg540TErXG3500fbHzRzLc"
                       token={makePayment}
                       amount={finalBalnce * 100}
-                      name="Placed Appointment"
+                      name="Place Appointment"
                       shippingAddress
                       billingAddress
                     >

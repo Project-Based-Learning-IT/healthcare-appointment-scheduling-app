@@ -2,8 +2,9 @@ const router = require("express").Router();
 const doctors = require("../models/doctor.model");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const Appointment = require("../models/appointment.model");
+const appointmentImport = require("../models/appointment.model");
 const { Doctor, Slot, DateSchedule } = doctors;
+const { Appointment, Feedback } = appointmentImport;
 
 function createDate(date) {
   return new DateSchedule({
@@ -71,7 +72,7 @@ router.route("/add").post((req, res) => {
 router.route("/update").put((req, res) => {
   const username = req.body.username; // Required.. can't be undefined
 
-  Doctor.findOne({ username: req.body.username }).then((doctor) => {
+  Doctor.findOne({ username: username }).then((doctor) => {
     if (doctor) {
       doctor.name = req.body.name;
       doctor.phoneNumber = req.body.phoneNumber;
@@ -173,9 +174,10 @@ router.route("/get-slots").post(async (req, res) => {
 router.route("/book-slot").post((req, res) => {
   const patientId = req.body.googleId; // Patient's google id
   const patientName = req.body.patientName; // Patient's name
-  const doctorId = req.body.doctorId; // Doctor's id
+  const doctorId = req.body.doctorId; // Doctor's id 606460d2e0dd28cc76d9b0f3 
   const slotId = req.body.slotId; // Id of that particular slot
   const dateId = req.body.dateId; // Id of that particular date
+  const meetLink = "";
 
   Doctor.findOne({ _id: doctorId }).then((doctor) => {
     const date = doctor.dates.id(dateId);
@@ -195,7 +197,11 @@ router.route("/book-slot").post((req, res) => {
           doctorName: doctor.name,
           doctorEmail: doctor.email,
           patientName: patientName,
+          googleMeetLink: meetLink,
+          feedback: new Feedback()
         });
+
+        console.log(newAppointment);
 
         newAppointment
           .save()
@@ -236,5 +242,33 @@ router.route("/appointments").post(async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+router.route('/todays-appointments').post(async (req, res) => {
+  try {
+    const date = new Date()
+    let currDate = date.getFullYear().toString()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+
+    currDate += month < 10 ? ('-0' + month.toString()) : '-' + month.toString()
+    currDate += day < 10 ? ('-0' + day.toString()) : '-' + day.toString()
+
+    const doctorId = req.body.doctorId;
+
+    const appointments = await Appointment.find({ doctorId : doctorId, date : currDate });
+
+    const sortedAppointments = appointments.sort((a, b) => {
+      return (
+        Date.parse(a.date + "T" + a.slotTime) - Date.parse(b.date + "T" + b.slotTime)
+      );
+    });
+
+    res.status(200).json(sortedAppointments);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+})
 
 module.exports = router;

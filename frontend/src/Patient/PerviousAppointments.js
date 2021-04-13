@@ -11,12 +11,10 @@ import Leftside from "../Dashbaord/LeftsidePatient";
 import { Link } from "react-router-dom";
 
 const PatientAppointments = () => {
-  
-
   const [Appointments, setAppointments] = useState([]);
 
   const fetchAppointments = async () => {
-    
+
     const { data } = await Axios.post(
       `${process.env.REACT_APP_SERVER_URL}/patients/previous-appointments/`,
       {
@@ -71,11 +69,17 @@ const PatientAppointments = () => {
                       <th scope="row">{Appointment.slotTime}</th>
                       <th scope="row">{Appointment.doctorName}</th>
                       <th scope="row">
-                        <Link to="/patient/feedback">
-                        <BsPencilSquare/>
-                        </Link>
-                        </th>
-
+                        <div style={{
+                          display: 'flex'
+                        }}>
+                          <Link to={`/patient/feedback/${Appointment._id}`}>
+                            <BsPencilSquare />
+                          </Link>
+                          {Appointment.feedback.given && <div style={{
+                            margin: '0 15px'
+                          }}>{Appointment.feedback.stars}/5</div>}
+                        </div>
+                      </th>
                     </tr>
                   ))}
                 </tbody>
