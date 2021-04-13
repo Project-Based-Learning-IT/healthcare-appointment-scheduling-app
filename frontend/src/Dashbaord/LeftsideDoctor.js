@@ -20,15 +20,15 @@ const LeftsideDoctor = () => {
 
         <li style={{ textDecoration: "none" }}>
           <Link to="/doctor/payment-history">
-            <Option Value="Appointments" />
+            <Option Value="Previous Appointments" />
           </Link>
         </li>
 
-        <li style={{ textDecoration: "none" }}>
+        {/* <li style={{ textDecoration: "none" }}>
           <Link to="/doctor/feedback">
             <Option Value="Feedback" />
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
