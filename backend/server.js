@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const patientsRouter = require('./routes/patients');
 const doctorsRotuer = require('./routes/doctors');
+const appointmentRouter = require('./routes/appointments');
 require('dotenv').config();
  
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(cors(
 
 app.use('/patients', patientsRouter);
 app.use('/doctors', doctorsRotuer);
+app.use('/appointments', appointmentRouter);
 
 const port = process.env.PORT || 5000;
 let uri = '';
