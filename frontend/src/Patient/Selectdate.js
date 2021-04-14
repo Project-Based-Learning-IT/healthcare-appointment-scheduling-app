@@ -44,7 +44,7 @@ const Selectdate = (props) => {
                   value={date}
                 />
                 {console.log(date)}
-                <p class="text-center">
+                <p className="text-center">
                   {date.getFullYear().toString() +
                     "-" +
                     (date.getMonth() + 1).toString() +

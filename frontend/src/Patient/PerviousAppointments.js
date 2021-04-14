@@ -80,8 +80,10 @@ const PatientAppointments = () => {
                           }}>{Appointment.feedback.stars}/5</div>}
                         </div>
                       </th>
-                    </tr>
+                      {console.log(Appointment)}
+                    </tr> 
                   ))}
+               
                 </tbody>
               </table>
             </Scrollbar>
