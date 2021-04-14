@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
 import Scrollbar from "react-scrollbars-custom";
-
 import Navbar from "../Basic/Navbar";
 import "../Dashbaord/dashboard.css";
-
+import StarPicker from 'react-star-picker';
 import Leftside from "../Dashbaord/LeftsideDoctor";
+import { Link } from "react-router-dom";
 
 const DocAppointments = () => {
 
@@ -19,7 +19,7 @@ const DocAppointments = () => {
     var token = localStorage.getItem("token");
     var decoded = jwt_decode(token);
     const { data } = await Axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/doctors/appointments/`,
+      `${process.env.REACT_APP_SERVER_URL}/doctors/previous-appointments/`,
       {
         doctorId: decoded._id,
       }
@@ -62,6 +62,7 @@ const DocAppointments = () => {
                     <th scope="col">Date</th>
                     <th scope="col">Time</th>
                     <th scope="col">Patient Name</th>
+					<th scope="col" style={{textAlign:'center'}}>Feedback</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -70,6 +71,10 @@ const DocAppointments = () => {
                       <th scope="row">{Appointment.date}</th>
                       <th scope="row">{Appointment.slotTime}</th>
                       <th scope="row">{Appointment.patientName}</th>
+					  {Appointment.feedback.given ? <th scope="row" style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+						  <StarPicker value={Appointment.feedback.stars} size="20"></StarPicker>
+						  <Link to={`/doctor/feedback/${Appointment._id}`}>Details</Link>
+					  </th> : <th scope="row" style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>-</th>}
                     </tr>
                   ))}
                 </tbody>
