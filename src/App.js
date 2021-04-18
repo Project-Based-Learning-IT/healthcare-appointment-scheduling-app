@@ -41,10 +41,14 @@ function App() {
 			function initClient() {
 				window.gapi.client
 					.init({
-						apiKey: process.env.REACT_APP_API_KEY,
-						clientId: process.env.REACT_APP_CLIENT_ID,
-						discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
-						scope: process.env.REACT_APP_SCOPE,
+						// apiKey: process.env.REACT_APP_API_KEY,
+						// clientId: process.env.REACT_APP_CLIENT_ID,
+						// discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
+						// scope: process.env.REACT_APP_SCOPE,
+						apiKey: "AIzaSyBOrTnWTJLqS7Q81dX25rf0RTA-QZcu93A",
+						clientId: "365803515308-u49jgtqo3u7lguso1ffeiqklm8l6fmgc.apps.googleusercontent.com",
+						discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+						scope: "https://www.googleapis.com/auth/calendar",
 					})
 					.then(
 						function () {
