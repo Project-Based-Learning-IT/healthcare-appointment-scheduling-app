@@ -45,8 +45,8 @@ function App() {
 						// clientId: process.env.REACT_APP_CLIENT_ID,
 						// discoveryDocs: [process.env.REACT_APP_DISCOVERY_DOCS],
 						// scope: process.env.REACT_APP_SCOPE,
-						apiKey: "AIzaSyAJO5wNT_dy2zKYt2Px7ZGvd2tLGyUA6QY",
-						clientId: "365803515308-boj1rpek38kabo6pm4448b869efoe47q.apps.googleusercontent.com",
+						apiKey: "AIzaSyBOrTnWTJLqS7Q81dX25rf0RTA-QZcu93A",
+						clientId: "365803515308-u49jgtqo3u7lguso1ffeiqklm8l6fmgc.apps.googleusercontent.com",
 						discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
 						scope: "https://www.googleapis.com/auth/calendar",
 					})
