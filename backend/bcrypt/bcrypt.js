@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 function hash(plainTextPassword, salt) {
-	return (plainTextPassword + "," + salt).split(',')
+	return (plainTextPassword + "," + salt).split(',')[0]
 }
 
 function compare(encryptedPassword, actualPassword) {
