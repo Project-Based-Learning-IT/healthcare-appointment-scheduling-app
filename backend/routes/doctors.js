@@ -5,6 +5,7 @@ require("dotenv").config();
 const appointmentImport = require("../models/appointment.model");
 const { Doctor, Slot, DateSchedule } = doctors;
 const { Appointment, Feedback } = appointmentImport;
+const bcrypt = require('../bcrypt/bcrypt');
 
 function createDate(date) {
 	return new DateSchedule({
@@ -97,11 +98,19 @@ router.route("/update").put((req, res) => {
 router.route("/login").post(async (req, res) => {
 	try {
 		const username = req.body.username;
-		const password = req.body.password;
+
+		// Password entered by the user
+		const plainTextPassword = req.body.password;
+
+		// Password Salt for hashing purpose
+		const passwordSalt = process.env.PASSWORD_SALT;
+
+		// Encrypted password after hashing operation
+		const encryptedPassword = bcrypt.hash(plainTextPassword, passwordSalt)
 
 		const doctor = await Doctor.findOne({
 			username: username,
-			password: password,
+			password: encryptedPassword,
 		});
 
 		console.log(doctor);
@@ -110,11 +119,17 @@ router.route("/login").post(async (req, res) => {
 			return res.status(201).json({ message: "wrong username or password" });
 		}
 
-		// Doctor found... return the token to the client side
-		const token = jwt.sign(JSON.stringify(doctor), process.env.KEY, {
-			algorithm: process.env.ALGORITHM,
-		});
+		// Doctor found, return the token to the client side
+		const token = jwt.sign(
+			JSON.stringify(doctor),
+			process.env.KEY, 
+			{
+				algorithm: process.env.ALGORITHM,
+			}
+		);
+
 		return res.status(200).json({ token: token.toString() });
+
 	} catch (err) {
 		console.log(err);
 		return res.status(400).json(err);
