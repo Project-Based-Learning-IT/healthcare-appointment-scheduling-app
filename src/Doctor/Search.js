@@ -37,7 +37,7 @@ const Search = () => {
     //event parameter passed implicitly
     let value = e.target.value; //get search box value
     setText(value); //set value in search box
-    fetchDoctor(); //fetches all doctors from database
+    fetchDoctor(); //fetches all doctors from database for researching
     value = value.toLowerCase(); //convert to lowercase for comparison
 
     //if value is not empty set suggestions after finding all using trie
