@@ -19,4 +19,4 @@ radiology
 rehabilitation medicine
 sexual health medicine
 sport and exercise medicine
-surgery`.split("\n");
+surgery`.split("\n"); //split by end of line and return as array
