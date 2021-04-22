@@ -6,6 +6,7 @@ function TrieNode(key) {
   this.end = false; //indicate end of word
 }
 
+//add prototype to constructor function for avoiding recreation of method
 TrieNode.prototype.getWord = function () {
   //get entire word from trie using last character's Node of word
   var output = []; //characters array
