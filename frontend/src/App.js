@@ -60,7 +60,7 @@ function App() {
 							setApiLoaded(true);
 						},
 						function (error) {
-							console.log(`error ${error}`);
+							console.log(`error ${JSON.stringify(error)}`);
 							setApiLoaded(true);
 						}
 					);

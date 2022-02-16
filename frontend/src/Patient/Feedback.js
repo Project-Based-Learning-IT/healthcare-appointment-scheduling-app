@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Basic/Navbar';
 import { Row, Input, Button } from 'reactstrap'
 import { Link, useHistory, useParams } from 'react-router-dom';

@@ -47,7 +47,7 @@ const Navbar = () => {
         }
       }
     } catch (err) {
-      console.log(`[Google] Some error occurred while signing in! ${err}`);
+      console.log(`[Google] Some error occurred while signing in! ${JSON.stringify(err)}`);
     }
   }
 
