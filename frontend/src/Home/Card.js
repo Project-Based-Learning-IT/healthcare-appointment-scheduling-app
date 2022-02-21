@@ -50,7 +50,7 @@ const Card = ({ login = "Doctor", Image, link }) => {
   }
 
   return (
-    <div className="card" style={{ width: "18rem" }}>
+    <div className="card mb-3" style={{ width: "18rem" }}>
       <img src={Image} className="card-img-top" alt="..." height="240" />
       <div className="card-body">
         {((!token || googleId) && login === "Doctor") && <Link to={link} className="btn btn-primary justify-content-center w-100">Login As A Doctor</Link>}
