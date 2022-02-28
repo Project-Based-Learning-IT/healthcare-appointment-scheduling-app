@@ -19,6 +19,7 @@ const PersonalDetails = () => {
       );
       if (res.status === 200) {
         setPatient(res.data);
+        console.log("patient", res.data);
         window.localStorage.setItem("user", JSON.stringify(res.data));
         setLoading(false);
       } else {
@@ -26,11 +27,12 @@ const PersonalDetails = () => {
         setLoading(false);
       }
     };
+
     getPatientDetails();
   }, [googleId]);
 
   return (
-    <div className="bg-dark" style={{ height: "100vh" }}>
+    <div className="">
       <Navbar />
       {loading ? (
         <div className="row justify-content-center position-relative">
@@ -41,7 +43,69 @@ const PersonalDetails = () => {
           ></div>
         </div>
       ) : (
-        <div>
+        <div
+          className="container mt-5 bg-light"
+          style={{
+            minHeight: "80vh",
+          }}
+        >
+          <div className="row">
+            <Leftside />
+            <div
+              className="col-md-9 bg-dark col-9"
+              style={{
+                border: "15px solid yellow ",
+                backgroundColor: "#6c757d",
+                minHeight: "80vh",
+              }}
+            >
+              <div className="row ">
+                <div className=" col-12 col-md-3 pt-4 ">
+                  <img
+                    src={patient.picture}
+                    // className="rounded-circle"
+
+                    style={{ width: "100%" }}
+                    alt="pic"
+                  />
+                </div>
+                <div className="col-12 col-md-9 p-4 order-md-first ">
+                  <div className="card ">
+                    <h4 className="card-header">Personal Details</h4>
+                    <ul className="list-group">
+                      <li className="list-group-item">
+                        <span className="badge badge-success mr-2 p-2">
+                          Name:
+                        </span>
+                        {patient.name}
+                      </li>
+                      <li className="list-group-item">
+                        <span className="badge badge-success mr-2 p-2">
+                          Email:
+                        </span>
+                        {patient.email}
+                      </li>
+                      <li className="list-group-item">
+                        <span className="badge badge-success mr-2 p-2">
+                          Phone No:
+                        </span>
+                        {patient.phoneNumber}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+export default PersonalDetails;
+
+{
+  /* <div>
           <div className="row m-5" style={{ maxWidth: "100%" }}>
             <div
               className="col-3 col-md-3 p-4 bg-white "
@@ -95,9 +159,5 @@ const PersonalDetails = () => {
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
-};
-export default PersonalDetails;
+        </div> */
+}

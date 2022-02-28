@@ -93,7 +93,7 @@ const Footer = () => {
       >
         <div className="col-md-12 text-center">
           <h4>
-            Contridute to the project here 
+            Contribute to the project here 
             <a
               href="https://github.com/Project-Based-Learning-IT/healthcare-appointment-scheduling-app"
               target="_blank"
