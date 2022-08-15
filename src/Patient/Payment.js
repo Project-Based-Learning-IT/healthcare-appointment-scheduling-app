@@ -126,14 +126,18 @@ const Payment = (props) => {
   return (
     <div className="bg-dark" style={{ height: "100vh" }}>
       <Navbar />
-      <div>
-        <div className="row m-5" style={{ maxWidth: "100%" }}>
+      <div
+       className="container mt-5 bg-light"
+       style={{
+         minHeight: "80vh",
+       }}
+      >
+        {/* <div className="row m-5" style={{ maxWidth: "100%" }}> */}
           <div
-            className="col-3 col-md-3 p-4 bg-white "
-            style={{ height: "80vh" }}
+            className="row"
           >
             <Leftside />
-          </div>
+          {/* </div> */}
           <div
             className="col-9 col-md-9 p-4 "
             style={{
