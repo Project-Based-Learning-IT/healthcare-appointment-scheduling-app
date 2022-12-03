@@ -1,0 +1,5 @@
+REACT_APP_SERVER_URL=http://localhost:5000
+REACT_APP_CLIENT_ID=
+REACT_APP_API_KEY=
+REACT_APP_DISCOVERY_DOCS=https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest
+REACT_APP_SCOPE=https://www.googleapis.com/auth/calendar
